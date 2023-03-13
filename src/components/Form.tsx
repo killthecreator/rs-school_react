@@ -34,9 +34,9 @@ class Form extends Component {
     const target = e.target as HTMLFormElement;
 
     const fileInput = this.fileLink;
-    const titleInput = this.titleInput.current.value;
-    const priceInput = this.priceInput.current.value;
-    const descrInput = this.descrInput.current.value;
+    const titleInput = this.titleInput.current!.value;
+    const priceInput = this.priceInput.current!.value;
+    const descrInput = this.descrInput.current!.value;
 
     const card: CardProps = {
       title: titleInput,
