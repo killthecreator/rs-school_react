@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1678530937729" clover="3.2.0">
-  <project timestamp="1678530937729" name="All files">
+<coverage generated="1678728873024" clover="3.2.0">
+  <project timestamp="1678728873024" name="All files">
     <metrics statements="212" coveredstatements="211" conditionals="14" coveredconditionals="13" methods="9" coveredmethods="9" elements="235" coveredelements="233" complexity="0" loc="212" ncloc="212" packages="2" files="4" classes="4"/>
     <package name="components">
       <metrics statements="117" coveredstatements="116" conditionals="14" coveredconditionals="13" methods="9" coveredmethods="9"/>
-      <file name="Card.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\module01\src\components\Card.tsx">
+      <file name="Card.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\rs-school_react\src\components\Card.tsx">
         <metrics statements="59" coveredstatements="58" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -66,7 +66,7 @@
         <line num="58" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
       </file>
-      <file name="Cards.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\module01\src\components\Cards.tsx">
+      <file name="Cards.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\rs-school_react\src\components\Cards.tsx">
         <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -86,7 +86,7 @@
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
       </file>
-      <file name="Searchbar.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\module01\src\components\Searchbar.tsx">
+      <file name="Searchbar.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\rs-school_react\src\components\Searchbar.tsx">
         <metrics statements="41" coveredstatements="41" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -133,7 +133,7 @@
     </package>
     <package name="data">
       <metrics statements="95" coveredstatements="95" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="cardsData.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\module01\src\data\cardsData.tsx">
+      <file name="cardsData.tsx" path="C:\Users\podiu\Desktop\Проекты\VSCode\RS\React\rs-school_react\src\data\cardsData.tsx">
         <metrics statements="95" coveredstatements="95" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
