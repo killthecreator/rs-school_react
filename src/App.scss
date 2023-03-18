@@ -177,6 +177,16 @@ main {
 
   column-gap: 40px;
 
+  fieldset {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    padding: 5px;
+    border: none;
+  }
+
   &__input {
     width: 150px;
     max-width: 300px;
@@ -188,6 +198,14 @@ main {
     border-radius: 8px;
     text-align: right;
 
+    & ~ span {
+      display: none;
+      position: absolute;
+      bottom: -15px;
+      font-size: 12px;
+      color: red;
+    }
+
     &:focus {
       outline: none;
     }
@@ -198,6 +216,10 @@ main {
 
     &:invalid {
       outline: 1px solid red;
+
+      & ~ span {
+        display: block;
+      }
     }
 
     &_type_file {

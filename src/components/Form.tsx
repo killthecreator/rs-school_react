@@ -15,7 +15,6 @@ class Form extends Component<IForm> {
   fileInput: React.RefObject<HTMLInputElement>;
   cards: React.RefObject<Card[]>;
   fileLink: string;
-  submit: React.RefObject<HTMLInputElement>;
 
   constructor(props: IForm) {
     super(props);
@@ -26,7 +25,6 @@ class Form extends Component<IForm> {
     this.fileInput = React.createRef();
     this.cards = React.createRef();
     this.fileLink = '';
-    this.submit = React.createRef();
   }
 
   state = {
@@ -38,7 +36,9 @@ class Form extends Component<IForm> {
     e.preventDefault();
 
     if (!this.state.required) {
-      await this.setState({ required: true, disabled: true });
+      await this.setState({ required: true });
+      e.target.dispatchEvent(new Event('click'));
+      await this.setState({ disabled: true });
       await this.checkFormValidation();
       if (this.state.disabled) return;
     }
@@ -59,7 +59,7 @@ class Form extends Component<IForm> {
     alert('Card data has been saved');
     this.fileLink = '';
     target.reset();
-    await this.setState({ disabled: true, required: false });
+    this.setState({ disabled: true, required: false });
   }
 
   handleFileInput(e: React.SyntheticEvent) {
@@ -80,13 +80,11 @@ class Form extends Component<IForm> {
     const target = e.target as HTMLInputElement;
     if (target.value) {
       this.setState({ disabled: false });
-      if (this.state.required) {
-        this.checkFormValidation();
-      }
+      if (this.state.required) this.checkFormValidation();
     }
   }
 
-  async checkFormValidation() {
+  checkFormValidation() {
     this.setState({ disabled: this.form.current?.checkValidity() ? false : true });
   }
 
@@ -99,47 +97,67 @@ class Form extends Component<IForm> {
           onChange={this.checkFormValidation.bind(this)}
           ref={this.form}
         >
-          <label className="form__label">Input card data: </label>
-          <input
-            className="form__input form__input_type_file"
-            type="file"
-            placeholder="Attach flat photo"
-            accept="image/*"
-            onChange={this.handleFileInput.bind(this)}
-            ref={this.fileInput}
-          />
-          <input
-            className="form__input form__input_type_title"
-            type="text"
-            placeholder="Input flat name"
-            ref={this.titleInput}
-            onInput={this.handleInput.bind(this)}
-            required={this.state.required}
-          />
-          <input
-            className="form__input form__input_type_price"
-            type="number"
-            min="0"
-            max="10000"
-            placeholder="Input flat price"
-            ref={this.priceInput}
-            onInput={this.handleInput.bind(this)}
-            required={this.state.required}
-          />
-          <textarea
-            className="form__input form__input_type_descr"
-            placeholder="Input flat description"
-            ref={this.descrInput}
-            onInput={this.handleInput.bind(this)}
-            required={this.state.required}
-          />
-          <input
-            className="form__input form__input_type_submit"
-            type="submit"
-            value="Submit"
-            ref={this.submit}
-            disabled={this.state.disabled}
-          />
+          <fieldset>
+            <label className="form__label">Flat image</label>
+            <input
+              className="form__input form__input_type_file"
+              type="file"
+              placeholder="Attach flat image"
+              accept="image/*"
+              onChange={this.handleFileInput.bind(this)}
+              ref={this.fileInput}
+            />
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Flat Title</label>
+            <input
+              className="form__input form__input_type_title"
+              type="text"
+              placeholder="Input flat name"
+              ref={this.titleInput}
+              onInput={this.handleInput.bind(this)}
+              required={this.state.required}
+            />
+            <span>Invalid Input</span>
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Flat Price</label>
+            <input
+              className="form__input form__input_type_price"
+              type="number"
+              min="0"
+              max="10000"
+              placeholder="Input flat price"
+              ref={this.priceInput}
+              onInput={this.handleInput.bind(this)}
+              required={this.state.required}
+            />
+            <span>Invalid Input</span>
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Flat Description</label>
+            <textarea
+              className="form__input form__input_type_descr"
+              placeholder="Input flat description"
+              ref={this.descrInput}
+              onInput={this.handleInput.bind(this)}
+              required={this.state.required}
+            />
+            <span>Invalid Input</span>
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Submit your ad</label>
+            <input
+              className="form__input form__input_type_submit"
+              type="submit"
+              value="Submit"
+              disabled={this.state.disabled}
+            />
+          </fieldset>
         </form>
       </>
     );
