@@ -8,38 +8,48 @@ interface IForm {
 }
 
 class Form extends Component<IForm> {
+  form: React.RefObject<HTMLFormElement>;
   titleInput: React.RefObject<HTMLInputElement>;
   priceInput: React.RefObject<HTMLInputElement>;
   descrInput: React.RefObject<HTMLTextAreaElement>;
   fileInput: React.RefObject<HTMLInputElement>;
   cards: React.RefObject<Card[]>;
   fileLink: string;
+  submit: React.RefObject<HTMLInputElement>;
 
   constructor(props: IForm) {
     super(props);
+    this.form = React.createRef();
     this.titleInput = React.createRef();
     this.priceInput = React.createRef();
     this.descrInput = React.createRef();
     this.fileInput = React.createRef();
     this.cards = React.createRef();
     this.fileLink = '';
+    this.submit = React.createRef();
   }
 
-  handleSubmit(e: React.SyntheticEvent) {
+  state = {
+    disabled: true,
+    required: false,
+  };
+
+  async handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
+
+    if (!this.state.required) {
+      await this.setState({ required: true, disabled: true });
+      await this.checkFormValidation();
+      if (this.state.disabled) return;
+    }
 
     const target = e.target as HTMLFormElement;
 
-    const fileInput = this.fileLink;
-    const titleInput = this.titleInput.current!.value;
-    const priceInput = this.priceInput.current!.value;
-    const descrInput = this.descrInput.current!.value;
-
     const card: CardProps = {
-      title: titleInput,
-      image: fileInput ? fileInput : noImage,
-      price: +priceInput,
-      text: descrInput,
+      title: this.titleInput.current!.value,
+      image: this.fileLink ? this.fileLink : noImage,
+      price: +this.priceInput.current!.value,
+      text: this.descrInput.current!.value,
       likes: 0,
       bookmarks: 0,
     };
@@ -49,6 +59,7 @@ class Form extends Component<IForm> {
     alert('Card data has been saved');
     this.fileLink = '';
     target.reset();
+    await this.setState({ disabled: true, required: false });
   }
 
   handleFileInput(e: React.SyntheticEvent) {
@@ -65,25 +76,45 @@ class Form extends Component<IForm> {
     }
   }
 
+  handleInput(e: React.SyntheticEvent) {
+    const target = e.target as HTMLInputElement;
+    if (target.value) {
+      this.setState({ disabled: false });
+      if (this.state.required) {
+        this.checkFormValidation();
+      }
+    }
+  }
+
+  async checkFormValidation() {
+    this.setState({ disabled: this.form.current?.checkValidity() ? false : true });
+  }
+
   render() {
     return (
       <>
-        <form className="form" onSubmit={this.handleSubmit.bind(this)}>
+        <form
+          className="form"
+          onSubmit={this.handleSubmit.bind(this)}
+          onChange={this.checkFormValidation.bind(this)}
+          ref={this.form}
+        >
           <label className="form__label">Input card data: </label>
           <input
             className="form__input form__input_type_file"
             type="file"
             placeholder="Attach flat photo"
             accept="image/*"
-            ref={this.fileInput}
             onChange={this.handleFileInput.bind(this)}
+            ref={this.fileInput}
           />
           <input
             className="form__input form__input_type_title"
             type="text"
             placeholder="Input flat name"
             ref={this.titleInput}
-            required
+            onInput={this.handleInput.bind(this)}
+            required={this.state.required}
           />
           <input
             className="form__input form__input_type_price"
@@ -92,15 +123,23 @@ class Form extends Component<IForm> {
             max="10000"
             placeholder="Input flat price"
             ref={this.priceInput}
-            required
+            onInput={this.handleInput.bind(this)}
+            required={this.state.required}
           />
           <textarea
             className="form__input form__input_type_descr"
             placeholder="Input flat description"
             ref={this.descrInput}
-            required
+            onInput={this.handleInput.bind(this)}
+            required={this.state.required}
           />
-          <input className="form__input form__input_type_submit" type="submit" value="Submit" />
+          <input
+            className="form__input form__input_type_submit"
+            type="submit"
+            value="Submit"
+            ref={this.submit}
+            disabled={this.state.disabled}
+          />
         </form>
       </>
     );
