@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 import searchIcon from './../assets/search-icon.svg';
 
-interface ISearchBar {
-  filterCards: (value: string) => void;
-}
-
 class SearchBar extends Component<ISearchBar> {
   state = {
     inputValue: localStorage.getItem('searchValue') ? localStorage.getItem('searchValue') : '',
