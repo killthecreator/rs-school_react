@@ -3,18 +3,19 @@ import Card from './Card';
 
 import noImage from './../assets/no-image.jpg';
 
-class Form extends Component {
+interface IForm {
+  addCard: (card: CardProps) => void;
+}
+
+class Form extends Component<IForm> {
   titleInput: React.RefObject<HTMLInputElement>;
   priceInput: React.RefObject<HTMLInputElement>;
   descrInput: React.RefObject<HTMLTextAreaElement>;
   fileInput: React.RefObject<HTMLInputElement>;
   cards: React.RefObject<Card[]>;
   fileLink: string;
-  state: {
-    cards: CardProps[];
-  };
 
-  constructor(props: React.ReactPropTypes) {
+  constructor(props: IForm) {
     super(props);
     this.titleInput = React.createRef();
     this.priceInput = React.createRef();
@@ -22,10 +23,6 @@ class Form extends Component {
     this.fileInput = React.createRef();
     this.cards = React.createRef();
     this.fileLink = '';
-
-    this.state = {
-      cards: [],
-    };
   }
 
   handleSubmit(e: React.SyntheticEvent) {
@@ -47,10 +44,10 @@ class Form extends Component {
       bookmarks: 0,
     };
 
-    const newState = this.state;
-    newState.cards = newState.cards.concat(card);
-    this.setState(newState);
+    this.props.addCard(card);
+
     alert('Card data has been saved');
+    this.fileLink = '';
     target.reset();
   }
 
@@ -105,11 +102,6 @@ class Form extends Component {
           />
           <input className="form__input form__input_type_submit" type="submit" value="Submit" />
         </form>
-        <ul className="cards">
-          {this.state.cards.map((cardData, index) => (
-            <Card key={index} {...cardData} />
-          ))}
-        </ul>
       </>
     );
   }
