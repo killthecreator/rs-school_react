@@ -3,27 +3,30 @@ import React from 'react';
 import { describe, test, expect } from 'vitest';
 import { render, screen, fireEvent, queryByAttribute } from '@testing-library/react';
 
-import SearchBar from './../src/components/Searchbar';
-import Card from './../src/components/Card';
-import Cards from './../src/components/Cards';
+import SearchBar from '../src/components/Searchbar';
+import Card from '../src/components/Card';
+import Cards from '../src/components/Cards';
 
-import cardsData from './../src/data/cardsData';
+import cardsData from '../src/data/cardsData';
+
+import filterCards from './mocks/filterCards';
 
 describe('Search tests', () => {
   test('Should render Search component', () => {
-    render(<SearchBar />);
+    render(<SearchBar filterCards={filterCards} />);
     const form = screen.getByLabelText('form') as HTMLFormElement;
     expect(form).toBeDefined();
   });
 
   test('Should input values', () => {
-    render(<SearchBar />);
+    render(<SearchBar filterCards={filterCards} />);
     const input = screen.getByLabelText('input') as HTMLInputElement;
     fireEvent.input(input, { target: { value: 'test value' } });
     expect(input.value).toBe('test value');
   });
+
   test('Should save input to local storage on unmount', () => {
-    const { unmount } = render(<SearchBar />);
+    const { unmount } = render(<SearchBar filterCards={filterCards} />);
     unmount();
     expect(window.localStorage.searchValue).toBe('test value');
   });
@@ -52,7 +55,7 @@ describe('Cards tests', () => {
   });
 
   test('Should render Card list component', () => {
-    const { container } = render(<Cards {...cardsData} />);
+    const { container } = render(<Cards cards={cardsData} />);
     const numberOfCards = container.querySelectorAll('li');
     expect(numberOfCards.length).toBe(cardsData.length);
   });
