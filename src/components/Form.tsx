@@ -13,7 +13,6 @@ class Form extends Component<IForm> {
   priceInput: React.RefObject<HTMLInputElement>;
   descrInput: React.RefObject<HTMLTextAreaElement>;
   fileInput: React.RefObject<HTMLInputElement>;
-  cards: React.RefObject<Card[]>;
   fileLink: string;
 
   constructor(props: IForm) {
@@ -23,7 +22,6 @@ class Form extends Component<IForm> {
     this.priceInput = React.createRef();
     this.descrInput = React.createRef();
     this.fileInput = React.createRef();
-    this.cards = React.createRef();
     this.fileLink = '';
   }
 
@@ -37,8 +35,6 @@ class Form extends Component<IForm> {
 
     if (!this.state.required) {
       await this.setState({ required: true });
-      e.target.dispatchEvent(new Event('click'));
-      await this.setState({ disabled: true });
       await this.checkFormValidation();
       if (this.state.disabled) return;
     }
@@ -76,14 +72,6 @@ class Form extends Component<IForm> {
     }
   }
 
-  handleInput(e: React.SyntheticEvent) {
-    const target = e.target as HTMLInputElement;
-    if (target.value) {
-      this.setState({ disabled: false });
-      if (this.state.required) this.checkFormValidation();
-    }
-  }
-
   checkFormValidation() {
     this.setState({ disabled: this.form.current?.checkValidity() ? false : true });
   }
@@ -117,7 +105,6 @@ class Form extends Component<IForm> {
               type="text"
               placeholder="Input flat name"
               ref={this.titleInput}
-              onInput={this.handleInput.bind(this)}
               required={this.state.required}
             />
             <span>Invalid Input</span>
@@ -132,7 +119,6 @@ class Form extends Component<IForm> {
               max="10000"
               placeholder="Input flat price"
               ref={this.priceInput}
-              onInput={this.handleInput.bind(this)}
               required={this.state.required}
             />
             <span>Invalid Input</span>
@@ -144,7 +130,6 @@ class Form extends Component<IForm> {
               className="form__input form__input_type_descr"
               placeholder="Input flat description"
               ref={this.descrInput}
-              onInput={this.handleInput.bind(this)}
               required={this.state.required}
             />
             <span>Invalid Input</span>
@@ -152,13 +137,7 @@ class Form extends Component<IForm> {
 
           <fieldset>
             <label className="form__label">Date of arrival</label>
-            <input
-              type="date"
-              className="form__input"
-              placeholder="Input arrival date"
-              onInput={this.handleInput.bind(this)}
-              required={this.state.required}
-            />
+            <input type="date" className="form__input" placeholder="Input arrival date" />
           </fieldset>
 
           <fieldset>
@@ -166,30 +145,15 @@ class Form extends Component<IForm> {
             <div className="fieldset_type_radio__wrapper">
               <div className="form__input_type_radio">
                 <label className="form__label">1</label>
-                <input
-                  type="radio"
-                  className="form__input"
-                  onInput={this.handleInput.bind(this)}
-                  name="persons"
-                />
+                <input type="radio" className="form__input" name="persons" />
               </div>
               <div className="form__input_type_radio">
                 <label className="form__label">2</label>
-                <input
-                  type="radio"
-                  className="form__input"
-                  onInput={this.handleInput.bind(this)}
-                  name="persons"
-                />
+                <input type="radio" className="form__input" name="persons" />
               </div>
               <div className="form__input_type_radio">
                 <label className="form__label"> &gt;2</label>
-                <input
-                  type="radio"
-                  className="form__input"
-                  onInput={this.handleInput.bind(this)}
-                  name="persons"
-                />
+                <input type="radio" className="form__input" name="persons" />
               </div>
             </div>
           </fieldset>
@@ -199,19 +163,11 @@ class Form extends Component<IForm> {
             <div>
               <div>
                 <label className="form__label">Smoking allowed</label>
-                <input
-                  type="checkbox"
-                  className="form__input"
-                  onInput={this.handleInput.bind(this)}
-                />
+                <input type="checkbox" className="form__input" />
               </div>
               <div>
                 <label className="form__label">Pets allowed</label>
-                <input
-                  type="checkbox"
-                  className="form__input"
-                  onInput={this.handleInput.bind(this)}
-                />
+                <input type="checkbox" className="form__input" />
               </div>
             </div>
           </fieldset>
