@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { describe, test, expect } from 'vitest';
-import { render, screen, fireEvent, queryByAttribute } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import SearchBar from '../src/components/Searchbar';
 import Card from '../src/components/Card';

@@ -93,6 +93,7 @@ class Form extends Component<IForm> {
       <>
         <form
           className="form"
+          aria-label="form"
           onSubmit={this.handleSubmit.bind(this)}
           onChange={this.checkFormValidation.bind(this)}
           ref={this.form}
@@ -147,6 +148,95 @@ class Form extends Component<IForm> {
               required={this.state.required}
             />
             <span>Invalid Input</span>
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Date of arrival</label>
+            <input
+              type="date"
+              className="form__input"
+              placeholder="Input arrival date"
+              onInput={this.handleInput.bind(this)}
+              required={this.state.required}
+            />
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Persons planning to live</label>
+            <div className="fieldset_type_radio__wrapper">
+              <div className="form__input_type_radio">
+                <label className="form__label">1</label>
+                <input
+                  type="radio"
+                  className="form__input"
+                  onInput={this.handleInput.bind(this)}
+                  name="persons"
+                />
+              </div>
+              <div className="form__input_type_radio">
+                <label className="form__label">2</label>
+                <input
+                  type="radio"
+                  className="form__input"
+                  onInput={this.handleInput.bind(this)}
+                  name="persons"
+                />
+              </div>
+              <div className="form__input_type_radio">
+                <label className="form__label"> &gt;2</label>
+                <input
+                  type="radio"
+                  className="form__input"
+                  onInput={this.handleInput.bind(this)}
+                  name="persons"
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Special conditions</label>
+            <div>
+              <div>
+                <label className="form__label">Smoking allowed</label>
+                <input
+                  type="checkbox"
+                  className="form__input"
+                  onInput={this.handleInput.bind(this)}
+                />
+              </div>
+              <div>
+                <label className="form__label">Pets allowed</label>
+                <input
+                  type="checkbox"
+                  className="form__input"
+                  onInput={this.handleInput.bind(this)}
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <label className="form__label">Pick area</label>
+            <select name="location">
+              <option value="Bielany">Bielany</option>
+              <option value="Bemowo">Bemowo</option>
+              <option value="Bialoleka">Bialoleka</option>
+              <option value="Wawer">Wawer</option>
+              <option value="Wesola">Wesola</option>
+              <option value="Wlochy">Wlochy</option>
+              <option value="Wola">Wola</option>
+              <option value="Zoliborz">Zoliborz</option>
+              <option value="Mokotów">Mokotów</option>
+              <option value="Ochota">Ochota</option>
+              <option value="Praga Poludnie">Praga Poludnie</option>
+              <option value="Praga Pólnoc">Praga Pólnoc</option>
+              <option value="Rembertów">Rembertów</option>
+              <option value="Sródmiescie">Sródmiescie</option>
+              <option value="Targówek">Targówek</option>
+              <option value="Ursus">Ursus</option>
+              <option value="Ursynów">Ursynów</option>
+            </select>
           </fieldset>
 
           <fieldset>

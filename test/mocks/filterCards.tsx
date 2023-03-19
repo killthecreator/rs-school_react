@@ -1,3 +1,1 @@
-export default () => {
-  console.log('filterCards mocked');
-};
+export default () => {};

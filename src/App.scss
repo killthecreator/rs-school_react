@@ -172,7 +172,8 @@ main {
 
 .form {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
 
   column-gap: 40px;
@@ -185,6 +186,21 @@ main {
     row-gap: 10px;
     padding: 5px;
     border: none;
+  }
+
+  div {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+
+    input {
+      width: 20px;
+      height: 20px;
+    }
+
+    label {
+      font-size: 12px;
+    }
   }
 
   &__input {
