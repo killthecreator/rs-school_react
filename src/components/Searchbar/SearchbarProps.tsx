@@ -1,3 +1,3 @@
-interface ISearchBar {
+interface SearchbarProps {
   filterCards: (value: string) => void;
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import SearchBar from './../components/Searchbar';
-import Cards from './../components/Cards';
-import cardsData from './../data/cardsData';
+import Searchbar from '../../components/Searchbar/Searchbar';
+import Cards from '../../components/Cards/Cards';
+import cardsData from '../../data/cardsData';
 
-class HomePage extends Component {
+class Homepage extends Component {
   state = {
     activeCards: cardsData,
   };
@@ -24,11 +24,11 @@ class HomePage extends Component {
   render() {
     return (
       <main>
-        <SearchBar filterCards={this.filterCards.bind(this)} />
+        <Searchbar filterCards={this.filterCards.bind(this)} />
         <Cards cards={this.state.activeCards} />
       </main>
     );
   }
 }
 
-export default HomePage;
+export default Homepage;

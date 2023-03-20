@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-import HomePage from './pages/Homepage';
-import NotFoundPage from './pages/Notfoundpage';
-import AboutPage from './pages/Aboutpage';
-import FormPage from './pages/Formpage';
+import HomePage from './pages/Homepage/Homepage';
+import NotFoundPage from './pages/Notfoundpage/Notfoundpage';
+import AboutPage from './pages/Aboutpage/Aboutpage';
+import FormPage from './pages/Formpage/Formpage';
 
 import './App.scss';
 

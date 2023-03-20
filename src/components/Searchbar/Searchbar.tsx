@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import searchIcon from './../assets/search-icon.svg';
+import searchIcon from './../../assets/search-icon.svg';
 
-class SearchBar extends Component<ISearchBar> {
+class Searchbar extends Component<SearchbarProps> {
   state = {
     inputValue: localStorage.getItem('searchValue') ? localStorage.getItem('searchValue') : '',
   };
@@ -28,7 +28,7 @@ class SearchBar extends Component<ISearchBar> {
   render() {
     return (
       <>
-        <form action="#" className="search" aria-label="form">
+        <form action="#" className="search" data-testid="form">
           <button className="search__btn" type="submit">
             <img src={searchIcon} alt="search-icon" className="search__icon" />
           </button>
@@ -36,7 +36,7 @@ class SearchBar extends Component<ISearchBar> {
           <input
             type="search"
             className="search__input"
-            aria-label="input"
+            data-testid="input"
             value={this.state.inputValue as string}
             onInput={this.handleInput.bind(this)}
             onKeyDown={this.handleInput.bind(this)}
@@ -47,4 +47,4 @@ class SearchBar extends Component<ISearchBar> {
   }
 }
 
-export default SearchBar;
+export default Searchbar;
