@@ -8,7 +8,7 @@ import FormPage from './pages/Formpage/Formpage';
 
 import './App.scss';
 
-const App: React.FC = () => (
+export default () => (
   <div className="App">
     <Router>
       <header>
@@ -39,5 +39,3 @@ const App: React.FC = () => (
     </Router>
   </div>
 );
-
-export default App;

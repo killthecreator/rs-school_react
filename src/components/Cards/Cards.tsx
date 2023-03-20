@@ -1,24 +1,16 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../Card/Card';
 
-class Cards extends Component<CardsProps> {
-  state = {
-    cards: this.props.cards,
-  };
+export default (props: CardsProps) => {
+  const [cards, setCards] = useState(props.cards);
 
-  static getDerivedStateFromProps(nextProps: CardsProps) {
-    return { cards: nextProps.cards };
-  }
+  useEffect(() => setCards(props.cards));
 
-  render() {
-    return (
-      <ul className="cards" data-testid="cards">
-        {this.state.cards.map((cardData, index) => (
-          <Card key={index} {...cardData} />
-        ))}
-      </ul>
-    );
-  }
-}
-
-export default Cards;
+  return (
+    <ul className="cards" data-testid="cards">
+      {cards.map((cardData, index) => (
+        <Card key={index} {...cardData} />
+      ))}
+    </ul>
+  );
+};

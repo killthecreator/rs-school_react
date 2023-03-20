@@ -1,9 +1,2 @@
-import React, { Component } from 'react';
-
-class AboutPage extends Component {
-  render() {
-    return <h1>This is about page!</h1>;
-  }
-}
-
-export default AboutPage;
+import React from 'react';
+export default () => <h1>This is about page!</h1>;
