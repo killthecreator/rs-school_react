@@ -1,27 +1,31 @@
 import React from 'react';
 
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import SearchBar from './Searchbar';
-import filterCards from './filterCards';
+
+import matchers from '@testing-library/jest-dom/matchers';
+expect.extend(matchers);
 
 describe('Searchbar tests', () => {
+  const filterCardsMock = vi.fn();
+
   test('Should render Searchbar component', () => {
-    render(<SearchBar filterCards={filterCards} />);
-    const form = screen.getByTestId('form') as HTMLFormElement;
+    render(<SearchBar filterCards={filterCardsMock} />);
+    const form = screen.getByTestId('form');
     expect(form).toBeDefined();
   });
 
   test('Should input values', () => {
-    render(<SearchBar filterCards={filterCards} />);
-    const input = screen.getByTestId('input') as HTMLInputElement;
+    render(<SearchBar filterCards={filterCardsMock} />);
+    const input = screen.getByTestId('search');
     fireEvent.input(input, { target: { value: 'test value' } });
-    expect(input.value).toBe('test value');
+    expect(input).toHaveValue('test value');
   });
 
   test('Should save input to local storage on unmount', () => {
-    const { unmount } = render(<SearchBar filterCards={filterCards} />);
+    const { unmount } = render(<SearchBar filterCards={filterCardsMock} />);
     unmount();
     expect(window.localStorage.searchValue).toBe('test value');
   });

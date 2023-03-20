@@ -12,7 +12,7 @@ class Cards extends Component<CardsProps> {
 
   render() {
     return (
-      <ul className="cards">
+      <ul className="cards" data-testid="cards">
         {this.state.cards.map((cardData, index) => (
           <Card key={index} {...cardData} />
         ))}

@@ -29,9 +29,15 @@ class Card extends Component<CardProps> {
           <img src={this.props.image} alt="card-image" className="card__image" />
         </div>
         <div className="card__content">
-          <p className="card__title">{this.props.title}</p>
-          <p className="card__price">{this.props.price}zł</p>
-          <p className="card__description">{this.props.text}</p>
+          <p className="card__title" data-testid="card-title">
+            {this.props.title}{' '}
+          </p>
+          <p className="card__price" data-testid="card-price">
+            {this.props.price}zł
+          </p>
+          <p className="card__description" data-testid="card-descr">
+            {this.props.text}
+          </p>
           <div className="card__btns">
             <button
               className="card__btn"

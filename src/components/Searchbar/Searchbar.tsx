@@ -36,7 +36,7 @@ class Searchbar extends Component<SearchbarProps> {
           <input
             type="search"
             className="search__input"
-            data-testid="input"
+            data-testid="search"
             value={this.state.inputValue as string}
             onInput={this.handleInput.bind(this)}
             onKeyDown={this.handleInput.bind(this)}

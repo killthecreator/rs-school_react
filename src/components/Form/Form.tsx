@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Card from './../Card/Card';
 
 import noImage from './../../assets/no-image.jpg';
 
@@ -13,7 +12,7 @@ class Form extends Component<FormProps> {
 
   constructor(props: FormProps) {
     super(props);
-    this.form = React.createRef();
+    this.form = React.createRef() as React.RefObject<HTMLFormElement>;
     this.titleInput = React.createRef();
     this.priceInput = React.createRef();
     this.descrInput = React.createRef();
@@ -37,11 +36,13 @@ class Form extends Component<FormProps> {
 
     const target = e.target as HTMLFormElement;
 
+    if (!this.titleInput.current || !this.priceInput.current || !this.descrInput.current) return;
+
     const card: CardProps = {
-      title: this.titleInput.current!.value,
+      title: this.titleInput.current.value,
       image: this.fileLink ? this.fileLink : noImage,
-      price: +this.priceInput.current!.value,
-      text: this.descrInput.current!.value,
+      price: +this.priceInput.current.value,
+      text: this.descrInput.current.value,
       likes: 0,
       bookmarks: 0,
     };
@@ -88,6 +89,7 @@ class Form extends Component<FormProps> {
             type="file"
             placeholder="Attach flat image"
             accept="image/*"
+            data-testid="file"
             onChange={this.handleFileInput.bind(this)}
             ref={this.fileInput}
           />
@@ -143,7 +145,7 @@ class Form extends Component<FormProps> {
           <div className="fieldset_type_radio__wrapper">
             <div className="form__input_type_radio">
               <label className="form__label">1</label>
-              <input type="radio" className="form__input" name="persons" />
+              <input type="radio" className="form__input" name="persons" defaultChecked />
             </div>
             <div className="form__input_type_radio">
               <label className="form__label">2</label>
