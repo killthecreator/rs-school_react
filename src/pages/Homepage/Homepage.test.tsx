@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { describe, test, expect, beforeEach } from 'vitest';
+import { describe, test, expect } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 import Homepage from './Homepage';
@@ -11,11 +11,8 @@ import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
 describe('Search tests', () => {
-  beforeEach(() => {
-    render(<Homepage />);
-  });
-
   test('Should filter cards', async () => {
+    render(<Homepage />);
     const input = screen.getByTestId('search');
     fireEvent.input(input, { target: { value: cardsData[0].title } });
 

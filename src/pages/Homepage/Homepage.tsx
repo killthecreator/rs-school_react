@@ -21,7 +21,7 @@ export default () => {
 
   return (
     <main>
-      <Searchbar filterCards={filterCards.bind(this)} />
+      <Searchbar filterCards={filterCards} />
       <Cards cards={activeCards} />
     </main>
   );
