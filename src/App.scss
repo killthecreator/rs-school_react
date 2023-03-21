@@ -223,7 +223,6 @@ main {
     text-align: right;
 
     & ~ span {
-      display: none;
       position: absolute;
       bottom: -15px;
       font-size: 12px;
@@ -238,12 +237,8 @@ main {
       scale: 1.05;
     }
 
-    &:invalid {
+    &.error {
       outline: 1px solid red;
-
-      & ~ span {
-        display: block;
-      }
     }
 
     &_type_file {

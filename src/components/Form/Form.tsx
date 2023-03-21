@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import noImage from './../../assets/no-image.jpg';
 
 export default (props: FormProps) => {
-  const [disabled, setDisabled] = useState(false);
-  const [required, setRequired] = useState(false);
-
   let fileLink = '';
 
-  const { register, handleSubmit, reset } = useForm<CardProps>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<CardProps>({ mode: 'onChange' });
 
   const onSubmit = (data: CardProps) => {
     const card = { ...data, image: fileLink ? fileLink : noImage, bookmarks: 0, likes: 0 };
@@ -18,19 +20,6 @@ export default (props: FormProps) => {
     fileLink = '';
     reset();
   };
-
-  /*  const handleSubmit = async (e: React.SyntheticEvent) => {
-
-
-    if (!required) {
-      await setRequired(true);
-      await checkFormValidation();
-      if (disabled) return;
-    }
-
-    setDisabled(true);
-    setRequired(false);
-  }; */
 
   const handleFileInput = (e: React.SyntheticEvent) => {
     const reader = new FileReader();
@@ -46,17 +35,8 @@ export default (props: FormProps) => {
     }
   };
 
-  /*   const checkFormValidation = () => {
-    setDisabled(form.current?.checkValidity() ? false : true);
-  }; */
-
   return (
-    <form
-      className="form"
-      data-testid="form"
-      onSubmit={handleSubmit(onSubmit)}
-      /* onChange={checkFormValidation} */
-    >
+    <form className="form" data-testid="form" onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
         <label className="form__label">Flat image</label>
         <input
@@ -72,38 +52,36 @@ export default (props: FormProps) => {
       <fieldset>
         <label className="form__label">Flat Title</label>
         <input
-          className="form__input form__input_type_title"
+          className={`form__input form__input_type_title ${errors.title ? 'error' : ''}`}
           type="text"
           placeholder="Input flat name"
           data-testid="title"
-          {...register('title', { required: required })}
+          {...register('title', { required: true })}
         />
-        <span>Invalid Input</span>
+        {errors.title && <span>Invalid Input</span>}
       </fieldset>
 
       <fieldset>
         <label className="form__label">Flat Price</label>
         <input
-          className="form__input form__input_type_price"
+          className={`form__input form__input_type_price ${errors.price ? 'error' : ''}`}
           type="number"
-          min="0"
-          max="10000"
           data-testid="price"
           placeholder="Input flat price"
-          {...register('price', { required: required })}
+          {...register('price', { required: true, min: 0, max: 10000 })}
         />
-        <span>Invalid Input</span>
+        {errors.price && <span>Invalid Input</span>}
       </fieldset>
 
       <fieldset>
         <label className="form__label">Flat Description</label>
         <textarea
-          className="form__input form__input_type_descr"
+          className={`form__input form__input_type_descr ${errors.text ? 'error' : ''}`}
           placeholder="Input flat description"
           data-testid="descr"
-          {...register('text', { required: required })}
+          {...register('text', { required: true })}
         />
-        <span>Invalid Input</span>
+        {errors.text && <span>Invalid Input</span>}
       </fieldset>
 
       <fieldset>
@@ -172,8 +150,8 @@ export default (props: FormProps) => {
           className="form__input form__input_type_submit"
           type="submit"
           value="Submit"
-          disabled={disabled}
           data-testid="submit"
+          disabled={Object.keys(errors).length !== 0 || !isDirty}
         />
       </fieldset>
     </form>
