@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 
 import HomePage from './pages/Homepage';
 import NotFoundPage from './pages/Notfoundpage';
@@ -13,14 +13,11 @@ const App: React.FC = () => (
       <header>
         <nav className="nav">
           <ul className="nav__list">
-            <li className="nav__item">
-              <Link to="/">Home</Link>
+            <li className="nav__item ">
+              <NavLink to="/">Home</NavLink>
             </li>
             <li className="nav__item">
-              <Link to="/about">About</Link>
-            </li>
-            <li className="nav__item">
-              <Link to="/404">404</Link>
+              <NavLink to="/about">About</NavLink>
             </li>
           </ul>
         </nav>
