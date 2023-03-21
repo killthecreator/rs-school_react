@@ -8,11 +8,13 @@ export default (props: CardProps) => {
 
   const setBtnState = (btnType: Btn) => {
     if (btnType === 'likes') {
-      setLikes(likes + likes === props.likes ? 1 : -1);
+      if (likes === props.likes) setLikes(likes + 1);
+      else setLikes(likes - 1);
     }
 
     if (btnType === 'bookmarks') {
-      setBookmarks(bookmarks + bookmarks === props.bookmarks ? 1 : -1);
+      if (bookmarks === props.bookmarks) setBookmarks(bookmarks + 1);
+      else setBookmarks(bookmarks - 1);
     }
   };
 
@@ -29,7 +31,7 @@ export default (props: CardProps) => {
       </div>
       <div className="card__content">
         <p className="card__title" data-testid="card-title">
-          {props.title}{' '}
+          {props.title}
         </p>
         <p className="card__price" data-testid="card-price">
           {props.price}zł

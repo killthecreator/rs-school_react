@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import searchIcon from './../../assets/search-icon.svg';
-
 export default (props: SearchbarProps) => {
   const [inputValue, setInputValue] = useState(
     localStorage.getItem('searchValue') ? localStorage.getItem('searchValue') : ''
@@ -10,7 +8,7 @@ export default (props: SearchbarProps) => {
   useEffect(() => {
     localStorage.setItem('searchValue', inputValue as string);
     props.filterCards(inputValue as string);
-  });
+  }, [inputValue]);
 
   const saveInputValue = async (e: React.SyntheticEvent) => {
     const input = e.target as HTMLInputElement;
@@ -19,14 +17,10 @@ export default (props: SearchbarProps) => {
 
   const handleInput = async (e: React.SyntheticEvent) => {
     await saveInputValue(e);
-    props.filterCards(inputValue as string);
   };
 
   return (
     <form action="#" className="search" data-testid="form">
-      <button className="search__btn" type="submit">
-        <img src={searchIcon} alt="search-icon" className="search__icon" />
-      </button>
       <input
         type="search"
         className="search__input"
