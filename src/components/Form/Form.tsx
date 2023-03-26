@@ -1,37 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import noImage from './../../assets/no-image.jpg';
 
-export default (props: FormProps) => {
-  let fileLink = '';
+interface FormData {
+  image: FileList;
+  title: string;
+  price: number;
+  text: string;
+}
 
+export default (props: FormProps) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isDirty },
-  } = useForm<CardProps>({ mode: 'onChange' });
+  } = useForm<FormData>();
 
-  const onSubmit = (data: CardProps) => {
-    const card = { ...data, image: fileLink ? fileLink : noImage, bookmarks: 0, likes: 0 };
+  const onSubmit = async (data: FormData) => {
+    const fileLink = await handleFileInput(data.image);
+    console.log(data);
+    const card = {
+      ...data,
+      image: fileLink ? fileLink : noImage,
+      bookmarks: 0,
+      likes: 0,
+    };
     props.addCard(card);
     alert('Card data has been saved');
-    fileLink = '';
     reset();
   };
 
-  const handleFileInput = (e: React.SyntheticEvent) => {
-    const reader = new FileReader();
-    const target = e.target as HTMLInputElement;
-
-    if (target.files) {
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const readerTarget = e.target as FileReader;
-        fileLink = readerTarget.result?.toString() as string;
-      };
-
-      reader.readAsDataURL(target.files[0]);
+  const handleFileInput = async (image: FileList) => {
+    if (image[0]) {
+      const link = await URL.createObjectURL(image[0]);
+      return link;
     }
   };
 
@@ -45,7 +49,7 @@ export default (props: FormProps) => {
           placeholder="Attach flat image"
           accept="image/*"
           data-testid="file"
-          {...register('image', { onChange: handleFileInput })}
+          {...register('image')}
         />
       </fieldset>
 
