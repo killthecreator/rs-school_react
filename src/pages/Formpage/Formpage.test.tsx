@@ -32,7 +32,7 @@ describe('Search tests', () => {
     const descrInput = screen.getByTestId('descr');
     fireEvent.input(descrInput, { target: { value: 'test value' } });
 
-    fireEvent.submit(form);
+    await waitFor(() => fireEvent.submit(form));
 
     const card = screen.getByTestId('card');
     await waitFor(() => expect(card).toBeDefined());

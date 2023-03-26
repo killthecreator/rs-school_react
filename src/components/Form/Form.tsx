@@ -20,7 +20,6 @@ export default (props: FormProps) => {
 
   const onSubmit = async (data: FormData) => {
     const fileLink = await handleFileInput(data.image);
-    console.log(data);
     const card = {
       ...data,
       image: fileLink ? fileLink : noImage,
