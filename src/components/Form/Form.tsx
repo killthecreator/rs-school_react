@@ -8,21 +8,20 @@ class Form extends Component<FormProps> {
   priceInput: React.RefObject<HTMLInputElement>;
   descrInput: React.RefObject<HTMLTextAreaElement>;
   fileInput: React.RefObject<HTMLInputElement>;
-  fileLink: string;
 
   constructor(props: FormProps) {
     super(props);
-    this.form = React.createRef() as React.RefObject<HTMLFormElement>;
+    this.form = React.createRef();
     this.titleInput = React.createRef();
     this.priceInput = React.createRef();
     this.descrInput = React.createRef();
     this.fileInput = React.createRef();
-    this.fileLink = '';
   }
 
   state = {
     disabled: true,
     required: false,
+    fileLink: '',
   };
 
   async handleSubmit(e: React.SyntheticEvent) {
@@ -38,9 +37,11 @@ class Form extends Component<FormProps> {
 
     if (!this.titleInput.current || !this.priceInput.current || !this.descrInput.current) return;
 
+    await this.handleFileInput();
+
     const card: CardProps = {
       title: this.titleInput.current.value,
-      image: this.fileLink ? this.fileLink : noImage,
+      image: this.state.fileLink ? this.state.fileLink : noImage,
       price: +this.priceInput.current.value,
       text: this.descrInput.current.value,
       likes: 0,
@@ -50,22 +51,17 @@ class Form extends Component<FormProps> {
     this.props.addCard(card);
 
     alert('Card data has been saved');
-    this.fileLink = '';
     target.reset();
-    this.setState({ disabled: true, required: false });
+    this.setState({ disabled: true, required: false, fileLink: '' });
   }
 
-  handleFileInput(e: React.SyntheticEvent) {
-    const reader = new FileReader();
-    const target = e.target as HTMLInputElement;
-
-    if (target.files) {
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const readerTarget = e.target as FileReader;
-        this.fileLink = readerTarget.result?.toString() as string;
-      };
-
-      reader.readAsDataURL(target.files[0]);
+  handleFileInput() {
+    if (this.fileInput.current && this.fileInput.current.files) {
+      const file = this.fileInput.current.files[0];
+      if (file) {
+        const link = URL.createObjectURL(file);
+        this.setState({ fileLink: link });
+      }
     }
   }
 
@@ -90,7 +86,6 @@ class Form extends Component<FormProps> {
             placeholder="Attach flat image"
             accept="image/*"
             data-testid="file"
-            onChange={this.handleFileInput.bind(this)}
             ref={this.fileInput}
           />
         </fieldset>
