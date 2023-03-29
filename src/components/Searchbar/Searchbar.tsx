@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import './Searchbar.scss';
 
-export default (props: SearchbarProps) => {
+const Searcbar = (props: SearchbarProps) => {
   const [inputValue, setInputValue] = useState(
     localStorage.getItem('searchValue') ? localStorage.getItem('searchValue') : ''
   );
@@ -32,3 +33,5 @@ export default (props: SearchbarProps) => {
     </form>
   );
 };
+
+export default Searcbar;

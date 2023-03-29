@@ -4,7 +4,7 @@ import Searchbar from '../../components/Searchbar/Searchbar';
 import Cards from '../../components/Cards/Cards';
 import cardsData from '../../data/cardsData';
 
-export default () => {
+const Homepage = () => {
   const [activeCards, setActiveCards] = useState(cardsData);
 
   const filterCards = (value: string) => {
@@ -26,3 +26,5 @@ export default () => {
     </main>
   );
 };
+
+export default Homepage;

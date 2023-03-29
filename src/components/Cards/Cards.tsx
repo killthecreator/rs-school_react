@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../Card/Card';
+import './Cards.scss';
 
-export default (props: CardsProps) => {
+const Cards = (props: CardsProps) => {
   const [cards, setCards] = useState(props.cards);
 
   useEffect(() => setCards(props.cards));
@@ -14,3 +15,5 @@ export default (props: CardsProps) => {
     </ul>
   );
 };
+
+export default Cards;

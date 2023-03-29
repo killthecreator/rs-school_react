@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from '../../components/Form/Form';
 import Cards from '../../components/Cards/Cards';
 
-export default () => {
+const Formpage = () => {
   const [activeCards, setActiveCards] = useState([] as CardProps[]);
 
   const addCard = (card: CardProps) => {
@@ -16,3 +16,5 @@ export default () => {
     </main>
   );
 };
+
+export default Formpage;

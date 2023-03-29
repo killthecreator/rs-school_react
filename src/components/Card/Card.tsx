@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import './Card.scss';
 import like from './../../assets/like.svg';
 import bookmark from './../../assets/bookmark.svg';
 
-export default (props: CardProps) => {
+const Card = (props: CardProps) => {
   const [likes, setLikes] = useState(props.likes);
   const [bookmarks, setBookmarks] = useState(props.bookmarks);
 
@@ -63,3 +64,5 @@ export default (props: CardProps) => {
     </li>
   );
 };
+
+export default Card;

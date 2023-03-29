@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import './Form.scss';
 
 import noImage from './../../assets/no-image.jpg';
 
@@ -10,7 +11,7 @@ interface FormData {
   text: string;
 }
 
-export default (props: FormProps) => {
+const Form = (props: FormProps) => {
   const {
     register,
     handleSubmit,
@@ -160,3 +161,5 @@ export default (props: FormProps) => {
     </form>
   );
 };
+
+export default Form;
