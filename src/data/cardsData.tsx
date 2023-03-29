@@ -4,6 +4,7 @@ import cardIamge3 from './../assets/card-3.jpg';
 import cardIamge4 from './../assets/card-4.jpg';
 import cardIamge5 from './../assets/card-5.jpg';
 import cardIamge6 from './../assets/card-6.jpg';
+import CardProps from 'components/Card/CardProps';
 
 const cardsData: CardProps[] = [
   {
