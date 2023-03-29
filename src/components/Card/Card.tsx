@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './Card.scss';
 import like from './../../assets/like.svg';
 import bookmark from './../../assets/bookmark.svg';
+import CardProps from './CardProps';
+import { Btn } from './CardBtn';
 
 const Card = (props: CardProps) => {
   const [likes, setLikes] = useState(props.likes);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Searchbar.scss';
+import SearchbarProps from './SearchbarProps';
 
 const Searcbar = (props: SearchbarProps) => {
   const [inputValue, setInputValue] = useState(
@@ -9,7 +10,7 @@ const Searcbar = (props: SearchbarProps) => {
   useEffect(() => {
     localStorage.setItem('searchValue', inputValue as string);
     props.filterCards(inputValue as string);
-  }, [inputValue]);
+  });
 
   const saveInputValue = async (e: React.SyntheticEvent) => {
     const input = e.target as HTMLInputElement;

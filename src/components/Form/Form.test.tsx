@@ -10,7 +10,7 @@ import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
 describe('Form tests', () => {
-  const addCardMock = vi.fn((card: CardProps) => {
+  const addCardMock = vi.fn(() => {
     return;
   });
   let jsdomAlert: () => void;
@@ -18,7 +18,7 @@ describe('Form tests', () => {
   beforeEach(() => {
     jsdomAlert = window.alert;
     window.alert = () => {};
-    const { container } = render(<Form addCard={addCardMock} />);
+    render(<Form addCard={addCardMock} />);
   });
 
   afterEach(() => {

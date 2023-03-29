@@ -1,1 +1,1 @@
-type Btn = 'likes' | 'bookmarks';
+export type Btn = 'likes' | 'bookmarks';
