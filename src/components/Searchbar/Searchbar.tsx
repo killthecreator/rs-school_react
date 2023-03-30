@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Searchbar.scss';
 import SearchbarProps from './SearchbarProps';
 
-const Searcbar = (props: SearchbarProps) => {
-  const [inputValue, setInputValue] = useState(
-    localStorage.getItem('searchValue') ? localStorage.getItem('searchValue') : ''
-  );
+const Searcbar = ({ filterCards }: SearchbarProps) => {
+  const inputSearch = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    localStorage.setItem('searchValue', inputValue as string);
-    props.filterCards(inputValue as string);
-  });
+  const [inputValue, setInputValue] = useState(localStorage.getItem('searchValue') || '');
 
-  const saveInputValue = async (e: React.SyntheticEvent) => {
-    const input = e.target as HTMLInputElement;
-    setInputValue(input.value);
-  };
+  useEffect(() => () => localStorage.setItem('searchValue', inputValue));
+  useEffect(() => filterCards(inputValue), [inputValue, filterCards]);
 
-  const handleInput = async (e: React.SyntheticEvent) => {
-    await saveInputValue(e);
+  const handleInput = () => {
+    if (inputSearch.current) {
+      setInputValue(inputSearch.current.value);
+    }
   };
 
   return (
@@ -27,7 +22,8 @@ const Searcbar = (props: SearchbarProps) => {
         type="search"
         className="search__input"
         data-testid="search"
-        value={inputValue as string}
+        ref={inputSearch}
+        value={inputValue}
         onInput={handleInput}
         onKeyDown={handleInput}
       />

@@ -23,7 +23,7 @@ describe('Card tests', () => {
     expect(card).toBeDefined();
   });
 
-  test('Should increase Card button value on click', async () => {
+  test('Should increase Card button value on click', () => {
     render(<Card {...cardsData[0]} />);
 
     const bookmarks = screen.getByTestId('bookmarks');

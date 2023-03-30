@@ -14,7 +14,7 @@ describe('Search tests', () => {
   test('Should filter cards', async () => {
     render(<Homepage />);
     const input = screen.getByTestId('search');
-    fireEvent.input(input, { target: { value: cardsData[0].title } });
+    await fireEvent.input(input, { target: { value: cardsData[0].title } });
 
     const cards = screen.getByTestId('cards');
     await waitFor(() => expect(cards.children.length).toBe(1));

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Searchbar from '../../components/Searchbar/Searchbar';
 import Cards from '../../components/Cards/Cards';
@@ -7,7 +7,7 @@ import cardsData from '../../data/cardsData';
 const Homepage = () => {
   const [activeCards, setActiveCards] = useState(cardsData);
 
-  const filterCards = (value: string) => {
+  const filterCards = useCallback((value: string) => {
     setActiveCards(
       cardsData.filter((card) => {
         return (
@@ -17,7 +17,7 @@ const Homepage = () => {
         );
       })
     );
-  };
+  }, []);
 
   return (
     <main>

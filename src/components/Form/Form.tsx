@@ -20,8 +20,8 @@ const Form = (props: FormProps) => {
     formState: { errors, isDirty },
   } = useForm<FormData>();
 
-  const onSubmit = async (data: FormData) => {
-    const fileLink = await handleFileInput(data.image);
+  const onSubmit = (data: FormData) => {
+    const fileLink = handleFileInput(data.image);
     const card = {
       ...data,
       image: fileLink ? fileLink : noImage,
@@ -33,9 +33,9 @@ const Form = (props: FormProps) => {
     reset();
   };
 
-  const handleFileInput = async (image: FileList) => {
+  const handleFileInput = (image: FileList) => {
     if (image[0]) {
-      const link = await URL.createObjectURL(image[0]);
+      const link = URL.createObjectURL(image[0]);
       return link;
     }
   };
