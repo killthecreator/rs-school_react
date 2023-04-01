@@ -4,7 +4,7 @@ import './Form.scss';
 import FormProps from './FormProps';
 import FormData from './FormData';
 
-const handleFileInput = (image: FileList) => {
+export const handleFileInput = (image: FileList) => {
   if (image[0]) {
     const link = URL.createObjectURL(image[0]);
     return link;

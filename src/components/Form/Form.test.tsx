@@ -4,7 +4,7 @@ import { describe, test, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Form from './Form';
+import Form, { handleFileInput } from './Form';
 
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
