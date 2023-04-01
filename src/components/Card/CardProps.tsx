@@ -1,8 +1,9 @@
 export default interface CardProps {
-  image: string;
+  image: string | undefined;
   title: string;
-  price: number;
+  price: number | 'No price';
   text: string;
   likes: number;
   bookmarks: number;
+  hidden?: true;
 }

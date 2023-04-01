@@ -6,6 +6,66 @@
   border-radius: 20px;
   background-color: #f5f5f5;
   overflow: hidden;
+  cursor: pointer;
+
+  &.hidden {
+    grid-template-rows: 80% 1fr;
+    max-height: 220px;
+
+    .card {
+      &__content {
+        padding: 10px 20px;
+      }
+
+      &__title {
+        text-align: center;
+      }
+      &__price,
+      &__description,
+      &__btns {
+        display: none;
+      }
+    }
+  }
+
+  &.active {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    grid-template-columns: 60% 1fr;
+    grid-template-rows: auto;
+
+    max-height: none;
+    max-width: 1000px;
+    margin: auto;
+    cursor: default;
+
+    box-shadow: 0px 0px 0px 3000px rgba(0, 0, 0, 0.7);
+
+    .card {
+      &__content {
+        padding: 20px;
+        padding-top: 80px;
+      }
+
+      &__title {
+        text-align: left;
+        white-space: normal;
+      }
+
+      &__description {
+        max-height: none;
+      }
+
+      &__price,
+      &__description,
+      &__btns,
+      &__close-btn {
+        display: flex;
+      }
+    }
+  }
 
   &__image-container {
     overflow: hidden;
@@ -34,6 +94,9 @@
     max-width: 100%;
     font-size: 20px;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__price {
@@ -76,7 +139,7 @@
       transform: scale(1.1);
     }
 
-    &_mode_active {
+    &.active {
       border: 1px solid #f5f5f5;
       opacity: 1;
       color: #f5f5f5;
@@ -96,5 +159,19 @@
     img {
       width: 16px;
     }
+  }
+
+  &__close-btn {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    padding-left: 4px;
+    border-radius: 50%;
+    border: 2px solid black;
+    font-weight: 700;
+    cursor: pointer;
   }
 }

@@ -2,15 +2,14 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.scss';
 import FormProps from './FormProps';
+import FormData from './FormData';
 
-import noImage from './../../assets/no-image.jpg';
-
-interface FormData {
-  image: FileList;
-  title: string;
-  price: number;
-  text: string;
-}
+const handleFileInput = (image: FileList) => {
+  if (image[0]) {
+    const link = URL.createObjectURL(image[0]);
+    return link;
+  }
+};
 
 const Form = (props: FormProps) => {
   const {
@@ -24,20 +23,13 @@ const Form = (props: FormProps) => {
     const fileLink = handleFileInput(data.image);
     const card = {
       ...data,
-      image: fileLink ? fileLink : noImage,
+      image: fileLink,
       bookmarks: 0,
       likes: 0,
     };
     props.addCard(card);
     alert('Card data has been saved');
     reset();
-  };
-
-  const handleFileInput = (image: FileList) => {
-    if (image[0]) {
-      const link = URL.createObjectURL(image[0]);
-      return link;
-    }
   };
 
   return (
