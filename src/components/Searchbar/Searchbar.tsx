@@ -18,9 +18,8 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
     }
   };
 
-  const handleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.SyntheticEvent<HTMLInputElement>) =>
     setInputValue(e.currentTarget.value);
-  };
 
   return (
     <>
@@ -31,7 +30,7 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
           data-testid="search"
           value={inputValue}
           onKeyDown={handleKeyDown}
-          onChange={handleChange}
+          onInput={handleInput}
           required
         />
       </form>
