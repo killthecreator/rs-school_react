@@ -1,27 +1,33 @@
 import React from 'react';
 
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 import Homepage from './Homepage';
-
 import matchers from '@testing-library/jest-dom/matchers';
+import flickrFetchData from './../../data/flickrFetchData';
 
 expect.extend(matchers);
 
+global.fetch = vi.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(flickrFetchData),
+  })
+);
+
 describe('Search tests', () => {
-  test('Should fetch cards', () => {
+  test('Should fetch cards', async () => {
     render(<Homepage />);
     const input = screen.getByTestId('search');
-    waitFor(() => fireEvent.input(input, { target: { value: 'cats' } }));
-    waitFor(() => fireEvent.keyDown(input, { key: 'Enter', code: 'Enter', charCode: 13 }));
+    fireEvent.input(input, { target: { value: 'cats' } });
+    fireEvent.keyDown(input, { key: 'Enter' });
 
     const cards = screen.queryByTestId('cards') as HTMLUListElement;
 
-    waitFor(() => expect(cards.children.length).toBe(6));
+    await waitFor(() => expect(cards.children.length).toBe(6));
   });
 
-  test('Should have pending message when fetching and remove it after success', () => {
+  test('Should have pending message when fetching and remove it after success', async () => {
     render(<Homepage />);
     const input = screen.getByTestId('search');
     fireEvent.input(input, { target: { value: 'cats' } });
@@ -30,6 +36,6 @@ describe('Search tests', () => {
     const pending = screen.getByTestId('pending');
 
     expect(pending).toBeInTheDocument();
-    waitFor(() => expect(pending).toNotBeInTheDocument());
+    await waitFor(() => expect(pending).not.toBeInTheDocument());
   });
 });

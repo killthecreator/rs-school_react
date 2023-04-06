@@ -10,7 +10,6 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
       case 'Enter':
-        e.preventDefault();
         if (inputValue) {
           filterCards(inputValue);
         }
@@ -23,7 +22,7 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
 
   return (
     <>
-      <form action="#" className="search" data-testid="form">
+      <form className="search" data-testid="form" onSubmit={(e) => e.preventDefault()}>
         <input
           type="search"
           className="search__input"

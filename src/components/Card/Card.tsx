@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
 import { LoremIpsum } from 'react-lorem-ipsum';
 import './Card.scss';
 import like from './../../assets/like.svg';
@@ -14,20 +14,24 @@ const Card = (props: CardProps) => {
   const [active, setActive] = useState(false);
 
   const setBtnState = (btnType: Btn) => {
-    if (btnType === 'likes') {
-      if (likes.counter === props.likes) setLikes({ counter: likes.counter + 1, active: true });
-      else setLikes({ counter: likes.counter - 1, active: false });
-    }
-    if (btnType === 'bookmarks') {
-      if (bookmarks.counter === props.bookmarks)
-        setBookmarks({ counter: bookmarks.counter + 1, active: true });
-      else setBookmarks({ counter: bookmarks.counter - 1, active: false });
+    switch (btnType) {
+      case 'likes':
+        setLikes({
+          counter: likes.counter === props.likes ? ++likes.counter : --likes.counter,
+          active: !likes.active,
+        });
+        break;
+      case 'bookmarks':
+        setBookmarks({
+          counter: bookmarks.counter === props.likes ? ++bookmarks.counter : --bookmarks.counter,
+          active: !bookmarks.active,
+        });
+        break;
     }
   };
 
-  const hadnleBtnClick = (e: React.SyntheticEvent) => {
-    const target = e.currentTarget as HTMLButtonElement;
-    setBtnState(target.dataset.btntype as Btn);
+  const hadnleBtnClick = ({ currentTarget }: React.SyntheticEvent<HTMLButtonElement>) => {
+    setBtnState(currentTarget.dataset.btntype as Btn);
   };
 
   const showFullCard = () => setActive(true);
