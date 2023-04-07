@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import like from './../assets/like.svg';
-import bookmark from './../assets/bookmark.svg';
+import like from './../../assets/like.svg';
+import bookmark from './../../assets/bookmark.svg';
 
 class Card extends Component<CardProps> {
   state = {
@@ -24,19 +24,26 @@ class Card extends Component<CardProps> {
 
   render() {
     return (
-      <li className="card" aria-label="card">
+      <li className="card" data-testid="card">
         <div className="card__image-container">
           <img src={this.props.image} alt="card-image" className="card__image" />
         </div>
         <div className="card__content">
-          <p className="card__title">{this.props.title}</p>
-          <p className="card__price">{this.props.price}zł</p>
-          <p className="card__description">{this.props.text}</p>
+          <p className="card__title" data-testid="card-title">
+            {this.props.title}{' '}
+          </p>
+          <p className="card__price" data-testid="card-price">
+            {this.props.price}zł
+          </p>
+          <p className="card__description" data-testid="card-descr">
+            {this.props.text}
+          </p>
           <div className="card__btns">
             <button
               className="card__btn"
               onClick={this.hadnleBtnClick.bind(this)}
               data-btntype="likes"
+              data-testid="likes"
             >
               <img src={like} alt="like-icon" />
               <span> {this.state.likes}</span>
@@ -45,6 +52,7 @@ class Card extends Component<CardProps> {
               className="card__btn"
               onClick={this.hadnleBtnClick.bind(this)}
               data-btntype="bookmarks"
+              data-testid="bookmarks"
             >
               <img src={bookmark} alt="bookmark-icon" />
               <span>{this.state.bookmarks}</span>

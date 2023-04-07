@@ -1,0 +1,3 @@
+interface CardsProps {
+  cards: CardProps[];
+}

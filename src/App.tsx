@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 
-import HomePage from './pages/Homepage';
-import NotFoundPage from './pages/Notfoundpage';
-import AboutPage from './pages/Aboutpage';
+import HomePage from './pages/Homepage/Homepage';
+import NotFoundPage from './pages/Notfoundpage/Notfoundpage';
+import AboutPage from './pages/Aboutpage/Aboutpage';
+import FormPage from './pages/Formpage/Formpage';
 
 import './App.scss';
 
@@ -19,6 +20,9 @@ const App: React.FC = () => (
             <li className="nav__item">
               <NavLink to="/about">About</NavLink>
             </li>
+            <li className="nav__item">
+              <NavLink to="/form">Form</NavLink>
+            </li>
           </ul>
         </nav>
       </header>
@@ -26,6 +30,7 @@ const App: React.FC = () => (
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/form" element={<FormPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
