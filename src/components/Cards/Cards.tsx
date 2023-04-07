@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Card from '../Card/Card';
 import './Cards.scss';
 import CardsProps from './CardsProps';
 
-const Cards = (props: CardsProps) => {
-  const [cards, setCards] = useState(props.cards);
-
-  useEffect(() => setCards(props.cards), [props.cards]);
-
+const Cards = ({ cards }: CardsProps) => {
   return (
     <ul className="cards" data-testid="cards">
       {cards.map((cardData, index) => (

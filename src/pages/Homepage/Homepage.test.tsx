@@ -6,6 +6,8 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Homepage from './Homepage';
 import matchers from '@testing-library/jest-dom/matchers';
 import flickrFetchData from './../../data/flickrFetchData';
+import * as flickrAPICall from './../../utils/FlickrAPICall';
+import CardProps from './../../components/Card/CardProps';
 
 expect.extend(matchers);
 
@@ -33,7 +35,7 @@ describe('Search tests', () => {
     await waitFor(() => expect(pending).not.toBeInTheDocument());
   });
 
-  test('Should mock render mocked fetch cards', async () => {
+  test('Should fetch 6 cards and display them', async () => {
     render(<Homepage />);
 
     vi.stubGlobal('fetch', () =>
@@ -44,24 +46,40 @@ describe('Search tests', () => {
 
     const input = screen.getByTestId('search');
     fireEvent.input(input, { target: { value: 'error' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
+    await waitFor(() => fireEvent.keyDown(input, { key: 'Enter' }));
     const cards = screen.getByTestId('cards');
 
-    await waitFor(() => expect(cards.children).toHaveLength(flickrFetchData.photos.photo.length));
+    await waitFor(() => expect(cards.children).toHaveLength(6));
   });
 
   test('Should catch an error and show it as a message', async () => {
     render(<Homepage />);
 
     vi.stubGlobal('fetch', () => {
-      throw Error('test error');
+      throw Error('test error message');
     });
 
     const input = screen.getByTestId('search');
     fireEvent.input(input, { target: { value: 'error' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
+    await waitFor(() => fireEvent.keyDown(input, { key: 'Enter' }));
     const error = screen.getByTestId('error');
 
-    expect(error.textContent).toBe('test error');
+    await waitFor(() => expect(error.textContent).toBe('test error message'));
+  });
+
+  test('Should call fetch and handle an error', async () => {
+    const mock = vi
+      .spyOn(flickrAPICall, 'default')
+      .mockImplementation(async (): Promise<CardProps[]> => {
+        throw Error('test');
+      });
+
+    render(<Homepage />);
+
+    const input = screen.getByTestId('search');
+    fireEvent.input(input, { target: { value: 'test' } });
+    fireEvent.keyDown(input, { key: 'Enter' });
+
+    await waitFor(() => expect(mock).toHaveBeenCalledTimes(1));
   });
 });

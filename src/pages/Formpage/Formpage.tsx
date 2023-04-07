@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useSelector } from 'react-redux';
+import { RootState } from './../../redux/store';
+
 import Form from '../../components/Form/Form';
 import Cards from '../../components/Cards/Cards';
-import CardProps from 'components/Card/CardProps';
 
 const Formpage = () => {
-  const [activeCards, setActiveCards] = useState([] as CardProps[]);
-
-  const addCard = (card: CardProps) => {
-    setActiveCards(activeCards.concat(card));
-  };
+  const { activeCards } = useSelector((state: RootState) => state.formpage);
 
   return (
     <main>
-      <Form addCard={addCard} />
+      <Form />
       <Cards cards={activeCards} />
     </main>
   );

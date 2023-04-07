@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import './Form.scss';
-import FormProps from './FormProps';
+
+import { useDispatch } from 'react-redux';
+import { addCard } from '../../redux/slices/pages/FormpageSlice';
+
 import FormData from './FormData';
+import './Form.scss';
 
 export const handleFileInput = (image: File) => {
   try {
@@ -13,7 +16,8 @@ export const handleFileInput = (image: File) => {
   }
 };
 
-const Form = (props: FormProps) => {
+const Form = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -29,7 +33,7 @@ const Form = (props: FormProps) => {
       bookmarks: 0,
       likes: 0,
     };
-    props.addCard(card);
+    dispatch(addCard(card));
     alert('Card data has been saved');
     reset();
   };

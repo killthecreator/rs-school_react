@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import './Searchbar.scss';
+import React from 'react';
 import SearchbarProps from './SearchbarProps';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './../../redux/store';
+import { setValue } from '../../redux/slices/components/SearchbarSlice';
+import './Searchbar.scss';
 
 const Searcbar = ({ filterCards }: SearchbarProps) => {
-  const [inputValue, setInputValue] = useState(localStorage.getItem('searchValue') || '');
-
-  useEffect(() => () => localStorage.setItem('searchValue', inputValue));
+  const dispatch = useDispatch();
+  const inputValue = useSelector((state: RootState) => state.searchbar.value);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
@@ -17,9 +19,6 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
     }
   };
 
-  const handleInput = (e: React.SyntheticEvent<HTMLInputElement>) =>
-    setInputValue(e.currentTarget.value);
-
   return (
     <>
       <form className="search" data-testid="form" onSubmit={(e) => e.preventDefault()}>
@@ -29,7 +28,7 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
           data-testid="search"
           value={inputValue}
           onKeyDown={handleKeyDown}
-          onInput={handleInput}
+          onInput={(e) => dispatch(setValue(e.currentTarget.value))}
           required
         />
       </form>
