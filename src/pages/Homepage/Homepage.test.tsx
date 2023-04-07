@@ -64,19 +64,4 @@ describe('Search tests', () => {
 
     expect(error.textContent).toBe('test error');
   });
-
-  test('Should catch an error as a string and show it as a message', async () => {
-    render(<Homepage />);
-
-    vi.stubGlobal('fetch', () => {
-      throw Error('test error');
-    });
-
-    const input = screen.getByTestId('search');
-    fireEvent.input(input, { target: { value: 'error' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
-    const error = screen.getByTestId('error');
-
-    expect(error.textContent).toBe('test error');
-  });
 });
