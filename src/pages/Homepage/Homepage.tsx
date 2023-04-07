@@ -25,7 +25,7 @@ const Homepage = () => {
   return (
     <main>
       <Searchbar filterCards={filterCards} />
-      {error && <p>{error}</p>}
+      {error && <p data-testid="error">{error}</p>}
       {isPending && <p data-testid="pending">Loading...</p>}
       <Cards cards={activeCards} />
     </main>

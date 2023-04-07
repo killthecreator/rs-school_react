@@ -1,14 +1,15 @@
-import React, { useState, useRef, useReducer } from 'react';
+import React, { useState, useRef } from 'react';
 import { LoremIpsum } from 'react-lorem-ipsum';
 import './Card.scss';
 import like from './../../assets/like.svg';
 import bookmark from './../../assets/bookmark.svg';
-import CardProps from './CardProps';
-import { Btn } from './CardBtn';
 import noImage from './../../assets/no-image.jpg';
 
+import CardProps from './CardProps';
+import { Btn } from './CardBtn';
+
 const Card = (props: CardProps) => {
-  const card = useRef<HTMLLIElement>(null);
+  const closeBtn = useRef<HTMLButtonElement>(null);
   const [likes, setLikes] = useState({ counter: props.likes, active: false });
   const [bookmarks, setBookmarks] = useState({ counter: props.bookmarks, active: false });
   const [active, setActive] = useState(false);
@@ -23,7 +24,8 @@ const Card = (props: CardProps) => {
         break;
       case 'bookmarks':
         setBookmarks({
-          counter: bookmarks.counter === props.likes ? ++bookmarks.counter : --bookmarks.counter,
+          counter:
+            bookmarks.counter === props.bookmarks ? ++bookmarks.counter : --bookmarks.counter,
           active: !bookmarks.active,
         });
         break;
@@ -35,21 +37,19 @@ const Card = (props: CardProps) => {
   };
 
   const showFullCard = () => setActive(true);
-  const closeCard = () => setActive(false);
-
-  document.addEventListener('click', (e) => {
-    const target = e.target as Element;
-    if (card.current && !card.current.contains(target)) closeCard();
-  });
+  const closeCard = (e: React.SyntheticEvent<HTMLElement>) => {
+    if ((closeBtn.current && e.target === closeBtn.current) || e.target === e.currentTarget) {
+      setActive(false);
+    }
+  };
 
   return (
     <li
-      className={`card ${props.hidden && 'hidden'} ${active ? 'active' : ''}`}
-      ref={card}
-      onClick={(props.hidden && !active && showFullCard) || undefined}
+      className={`card ${props.hidden ? 'hidden' : ''} ${active ? 'active' : ''}`}
+      onClick={(props.hidden && !active && showFullCard) || closeCard}
       data-testid="card"
     >
-      <button className="card__close-btn" onClick={closeCard}>
+      <button className="card__close-btn" ref={closeBtn}>
         X
       </button>
       <div className="card__image-container">

@@ -4,10 +4,12 @@ import './Form.scss';
 import FormProps from './FormProps';
 import FormData from './FormData';
 
-export const handleFileInput = (image: FileList) => {
-  if (image[0]) {
-    const link = URL.createObjectURL(image[0]);
+export const handleFileInput = (image: File) => {
+  try {
+    const link = URL.createObjectURL(image);
     return link;
+  } catch (e) {
+    return;
   }
 };
 
@@ -20,7 +22,7 @@ const Form = (props: FormProps) => {
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
-    const fileLink = handleFileInput(data.image);
+    const fileLink = handleFileInput(data.image[0]);
     const card = {
       ...data,
       image: fileLink,
