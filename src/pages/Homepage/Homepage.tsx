@@ -11,9 +11,20 @@ const Homepage = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
 
-  const filterCards = (value: string) => {
+  const filterCards = async (value: string) => {
     clearCards();
-    flickrAPICall(setActiveCards, setIsPending, setError, value);
+    try {
+      const photosArr = await flickrAPICall(value);
+      setActiveCards(photosArr);
+    } catch (err) {
+      if (typeof err === 'string') {
+        setError(err);
+      } else if (err instanceof Error) {
+        setError(err.message);
+      }
+    } finally {
+      setIsPending(false);
+    }
   };
 
   const clearCards = () => {
