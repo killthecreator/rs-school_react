@@ -9,9 +9,12 @@ import Card from './Card';
 
 describe('Card tests', () => {
   test('Should save card current state on mount', () => {
-    const card = new Card({ ...cardsData[0] });
-    expect(card.state.likes).toBe(cardsData[0].likes);
-    expect(card.state.bookmarks).toBe(cardsData[0].bookmarks);
+    render(<Card {...cardsData[0]} />);
+    const likes = screen.getByTestId('likes');
+    const bookmarks = screen.getByTestId('bookmarks');
+
+    expect(+(likes.textContent as string)).toBe(cardsData[0].likes);
+    expect(+(bookmarks.textContent as string)).toBe(cardsData[0].bookmarks);
   });
 
   test('Should render Card component', () => {
@@ -20,7 +23,7 @@ describe('Card tests', () => {
     expect(card).toBeDefined();
   });
 
-  test('Should increase Card button value on click', async () => {
+  test('Should increase Card button value on click', () => {
     render(<Card {...cardsData[0]} />);
 
     const bookmarks = screen.getByTestId('bookmarks');

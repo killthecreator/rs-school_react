@@ -8,7 +8,7 @@ import FormPage from './pages/Formpage/Formpage';
 
 import './App.scss';
 
-const App: React.FC = () => (
+const App = () => (
   <div className="App">
     <Router>
       <header>

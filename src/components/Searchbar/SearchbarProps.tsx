@@ -1,3 +1,3 @@
-interface SearchbarProps {
+export default interface SearchbarProps {
   filterCards: (value: string) => void;
 }

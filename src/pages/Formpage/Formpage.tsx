@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Form from '../../components/Form/Form';
 import Cards from '../../components/Cards/Cards';
+import CardProps from 'components/Card/CardProps';
 
-class FormPage extends Component {
-  state = {
-    activeCards: [] as CardProps[],
+const Formpage = () => {
+  const [activeCards, setActiveCards] = useState([] as CardProps[]);
+
+  const addCard = (card: CardProps) => {
+    setActiveCards(activeCards.concat(card));
   };
 
-  addCard(card: CardProps) {
-    const newState = this.state;
-    newState.activeCards = newState.activeCards.concat(card);
-    this.setState(newState);
-  }
+  return (
+    <main>
+      <Form addCard={addCard} />
+      <Cards cards={activeCards} />
+    </main>
+  );
+};
 
-  render() {
-    return (
-      <main>
-        <Form addCard={this.addCard.bind(this)} />
-        <Cards cards={this.state.activeCards} />
-      </main>
-    );
-  }
-}
-
-export default FormPage;
+export default Formpage;

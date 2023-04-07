@@ -1,50 +1,27 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import './Searchbar.scss';
+import SearchbarProps from './SearchbarProps';
 
-import searchIcon from './../../assets/search-icon.svg';
+const Searcbar = ({ filterCards }: SearchbarProps) => {
+  const [inputValue, setInputValue] = useState(localStorage.getItem('searchValue') || '');
 
-class Searchbar extends Component<SearchbarProps> {
-  state = {
-    inputValue: localStorage.getItem('searchValue') ? localStorage.getItem('searchValue') : '',
-  };
+  useEffect(() => () => localStorage.setItem('searchValue', inputValue));
+  useEffect(() => filterCards(inputValue), [inputValue, filterCards]);
 
-  componentWillUnmount() {
-    localStorage.setItem('searchValue', this.state.inputValue as string);
-  }
+  const handleInput = (e: React.SyntheticEvent<HTMLInputElement>) =>
+    setInputValue(e.currentTarget.value);
 
-  componentDidMount() {
-    this.props.filterCards(this.state.inputValue as string);
-  }
+  return (
+    <form className="search" data-testid="form" onSubmit={(e) => e.preventDefault()}>
+      <input
+        type="search"
+        className="search__input"
+        data-testid="search"
+        value={inputValue}
+        onInput={handleInput}
+      />
+    </form>
+  );
+};
 
-  async saveInputValue(e: React.SyntheticEvent) {
-    const input = e.target as HTMLInputElement;
-    await this.setState({ inputValue: input.value });
-  }
-
-  async handleInput(e: React.SyntheticEvent) {
-    await this.saveInputValue(e);
-    this.props.filterCards(this.state.inputValue as string);
-  }
-
-  render() {
-    return (
-      <>
-        <form action="#" className="search" data-testid="form">
-          <button className="search__btn" type="submit">
-            <img src={searchIcon} alt="search-icon" className="search__icon" />
-          </button>
-
-          <input
-            type="search"
-            className="search__input"
-            data-testid="search"
-            value={this.state.inputValue as string}
-            onInput={this.handleInput.bind(this)}
-            onKeyDown={this.handleInput.bind(this)}
-          />
-        </form>
-      </>
-    );
-  }
-}
-
-export default Searchbar;
+export default Searcbar;
