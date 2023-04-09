@@ -28,7 +28,7 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
           data-testid="search"
           value={inputValue}
           onKeyDown={handleKeyDown}
-          onInput={(e) => dispatch(setValue(e.currentTarget.value))}
+          onInput={(e) => dispatch(setValue({ ...e.currentTarget }))}
           required
         />
       </form>

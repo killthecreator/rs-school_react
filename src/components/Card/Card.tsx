@@ -1,12 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { LoremIpsum } from 'react-lorem-ipsum';
-import './Card.scss';
+
 import like from './../../assets/like.svg';
 import bookmark from './../../assets/bookmark.svg';
 import noImage from './../../assets/no-image.jpg';
 
 import CardProps from './CardProps';
 import { Btn } from './CardBtn';
+
+import './Card.scss';
 
 const Card = (props: CardProps) => {
   const closeBtn = useRef<HTMLButtonElement>(null);

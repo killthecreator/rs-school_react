@@ -1,15 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
+interface InitialState {
+  value: string;
+}
+
+const initialState = {
+  value: '',
+};
+
 export const searchbarSlice = createSlice({
   name: 'searchbar',
-  initialState: {
-    value: '',
-  },
+  initialState,
   reducers: {
-    setValue: (state, action: PayloadAction<string>) => {
-      state.value = action.payload;
-    },
+    setValue: (state, action: PayloadAction<InitialState>) => action.payload,
   },
 });
 

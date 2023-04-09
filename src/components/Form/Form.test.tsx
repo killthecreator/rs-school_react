@@ -4,21 +4,18 @@ import { describe, test, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Form, { handleFileInput } from './Form';
+import Form from './Form';
 
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
 describe('Form tests', () => {
-  const addCardMock = vi.fn(() => {
-    return;
-  });
   let jsdomAlert: () => void;
 
   beforeEach(() => {
     jsdomAlert = window.alert;
     window.alert = () => {};
-    render(<Form addCard={addCardMock} />);
+    render(<Form />);
   });
 
   afterEach(() => {
@@ -78,10 +75,5 @@ describe('Form tests', () => {
     await userEvent.upload(fileInput, file);
 
     expect(fileInput.files).toHaveLength(1);
-  });
-
-  test('Should catch an error with empty return when there is no such file', async () => {
-    const file = new File(['test'], 'test.png', { type: 'image/png' });
-    expect(handleFileInput(file)).toBe(undefined);
   });
 });
