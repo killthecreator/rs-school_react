@@ -1,6 +1,6 @@
 import CardProps from './../components/Card/CardProps';
 
-interface FlickrData {
+export interface FlickrData {
   farm: number;
   id: string;
   isfamily: 0 | 1;

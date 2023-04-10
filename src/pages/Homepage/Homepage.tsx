@@ -11,16 +11,33 @@ import {
   togglePending,
   setError,
   clearCards,
-} from '../../redux/slices/pages/HomepageSlice';
+} from './../../redux/slices/pages/HomepageSlice';
+import { useGetFlickrByValueQuery } from './../../redux/slices/API/flickrAPISlice';
 
 const Homepage = () => {
+  const { data = [], isLoading, isFetching, isError } = useGetFlickrByValueQuery();
+
   const dispatch = useDispatch();
   const { isPending, error, activeCards } = useSelector((state: RootState) => state.homepage);
 
   const filterCards = async (value: string) => {
     dispatch(clearCards());
     try {
-      const photosArr = await flickrAPICall(value);
+      const photosArr: CardProps[] = data.photos.photo.map((pic: FlickrData) => {
+        const image = +pic.server
+          ? `https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`
+          : undefined;
+        return {
+          image: image,
+          title: pic.title,
+          price: 'No price',
+          text: '',
+          likes: 0,
+          bookmarks: 0,
+          hidden: true,
+        };
+      });
+
       dispatch(setActiveCards(photosArr));
     } catch (err) {
       if (typeof err === 'string') dispatch(setError(err));
@@ -34,7 +51,7 @@ const Homepage = () => {
     <main>
       <Searchbar filterCards={filterCards} />
       {error && <p data-testid="error">{error}</p>}
-      {isPending && <p data-testid="pending">Loading...</p>}
+      {isLoading && <p data-testid="pending">Loading...</p>}
       <Cards cards={activeCards} />
     </main>
   );

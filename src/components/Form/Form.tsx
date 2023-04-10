@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,13 +20,13 @@ const Form = () => {
     reset,
     getValues,
     formState: { errors },
-  } = useForm<FormData>({ defaultValues: useMemo(() => formData, [formData]) });
+  } = useForm<FormData>({ defaultValues: formData });
+
+  const saveFormData = useCallback(() => dispatch(setFormData(getValues())), [dispatch, getValues]);
 
   useEffect(() => {
     reset(formData);
   }, [reset, formData]);
-
-  const saveFormData = useCallback(() => dispatch(setFormData(getValues())), [dispatch, getValues]);
 
   useEffect(
     () => () => {
