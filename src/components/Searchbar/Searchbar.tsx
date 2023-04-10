@@ -10,8 +10,6 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
     if (initValue) filterCards(initValue);
   }, [filterCards]);
 
-  useEffect(() => () => localStorage.setItem('searchValue', inputValue), [inputValue]);
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
       case 'Enter':
@@ -22,8 +20,10 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
     }
   };
 
-  const handleInput = (e: React.SyntheticEvent<HTMLInputElement>) =>
+  const handleInput = async (e: React.SyntheticEvent<HTMLInputElement>) => {
+    localStorage.setItem('searchValue', e.currentTarget.value);
     setInputValue(e.currentTarget.value);
+  };
 
   return (
     <>
