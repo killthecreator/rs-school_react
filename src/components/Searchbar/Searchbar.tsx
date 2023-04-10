@@ -5,7 +5,12 @@ import SearchbarProps from './SearchbarProps';
 const Searcbar = ({ filterCards }: SearchbarProps) => {
   const [inputValue, setInputValue] = useState(localStorage.getItem('searchValue') || '');
 
-  useEffect(() => () => localStorage.setItem('searchValue', inputValue));
+  useEffect(() => {
+    const initValue = localStorage.getItem('searchValue') || '';
+    if (initValue) filterCards(initValue);
+  }, [filterCards]);
+
+  useEffect(() => () => localStorage.setItem('searchValue', inputValue), [inputValue]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {

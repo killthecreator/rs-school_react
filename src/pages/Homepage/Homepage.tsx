@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import Searchbar from '../../components/Searchbar/Searchbar';
 import Cards from '../../components/Cards/Cards';
@@ -11,7 +11,7 @@ const Homepage = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
 
-  const filterCards = async (value: string) => {
+  const filterCards = useCallback(async (value: string) => {
     clearCards();
     try {
       const photosArr = await flickrAPICall(value);
@@ -25,8 +25,7 @@ const Homepage = () => {
     } finally {
       setIsPending(false);
     }
-  };
-
+  }, []);
   const clearCards = () => {
     setActiveCards([]);
     setIsPending(true);
