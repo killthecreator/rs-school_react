@@ -9,7 +9,9 @@ export const flickrApi = createApi({
   endpoints: (builder) => ({
     getFlickrByValue: builder.query<FlickrData, string>({
       query: (value) =>
-        `?method=flickr.photos.search&api_key=${API_KEY}&tags=${value}&tagmode=all&per_page=6&page=1&format=json&nojsoncallback=1`,
+        `?method=flickr.photos.${
+          value ? 'search' : 'getRecent'
+        }&api_key=${API_KEY}&text=${value}&safe_search=1&content_type=1&per_page=6&page=1&format=json&nojsoncallback=1`,
     }),
   }),
 });

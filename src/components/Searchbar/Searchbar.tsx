@@ -18,9 +18,7 @@ const Searcbar = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
       case 'Enter':
-        if (e.currentTarget.value) {
-          dispatch(setSearchValue({ ...e.currentTarget }));
-        }
+        dispatch(setSearchValue({ ...e.currentTarget }));
         break;
     }
   };
@@ -33,7 +31,6 @@ const Searcbar = () => {
         data-testid="search"
         onKeyDown={handleKeyDown}
         ref={inputSearch}
-        required
       />
     </form>
   );
