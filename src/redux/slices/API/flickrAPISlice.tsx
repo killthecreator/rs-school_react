@@ -3,7 +3,6 @@ import { FlickrData } from './../../../utils/FlickrAPICall';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-// Define a service using a base URL and expected endpoints
 export const flickrApi = createApi({
   reducerPath: 'flickrApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://www.flickr.com/services/rest/' }),

@@ -13,9 +13,9 @@ export const searchbarSlice = createSlice({
   name: 'searchbar',
   initialState,
   reducers: {
-    setValue: (state, action: PayloadAction<InitialState>) => action.payload,
+    setSearchValue: (state, action: PayloadAction<InitialState>) => action.payload,
   },
 });
 
-export const { setValue } = searchbarSlice.actions;
+export const { setSearchValue } = searchbarSlice.actions;
 export default searchbarSlice.reducer;
