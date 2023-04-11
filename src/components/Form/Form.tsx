@@ -37,6 +37,7 @@ const Form = () => {
 
   const onSubmit = (data: FormData) => {
     let fileLink;
+    console.log(data);
     if (data.image && data.image[0]) fileLink = URL.createObjectURL(data.image[0]);
     const card: CardProps = {
       ...data,
@@ -105,6 +106,7 @@ const Form = () => {
           type="date"
           className={`form__input ${errors.date ? 'error' : ''}`}
           placeholder="Input arrival date"
+          data-testid="date"
           {...register('date', { required: 'Choose a date' })}
         />
         {errors.date && <span>{errors.date.message}</span>}
@@ -119,6 +121,7 @@ const Form = () => {
               type="radio"
               className="form__input"
               value="1"
+              data-testid="radio"
               {...register('persons', { required: 'Pick a number' })}
             />
           </div>
@@ -150,7 +153,7 @@ const Form = () => {
 
       <fieldset>
         <label className="form__label">Pick area</label>
-        <select {...register('location', { required: 'Pick area' })}>
+        <select {...register('location', { required: 'Pick area' })} data-testid="select">
           <option value="" hidden>
             Pick area
           </option>

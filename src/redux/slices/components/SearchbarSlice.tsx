@@ -5,7 +5,7 @@ interface InitialState {
   value: string;
 }
 
-const initialState = {
+export const initialState = {
   value: '',
 };
 

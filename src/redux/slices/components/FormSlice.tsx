@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import FormData from './../../../components/Form/FormData';
 
-const initialState: FormData = {
+export const initialState: FormData = {
   title: '',
   image: undefined,
   persons: '',
