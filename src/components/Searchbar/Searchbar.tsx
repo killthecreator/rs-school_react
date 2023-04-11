@@ -7,15 +7,13 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
 
   useEffect(() => {
     const initValue = localStorage.getItem('searchValue') || '';
-    if (initValue) filterCards(initValue);
+    filterCards(initValue);
   }, [filterCards]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
       case 'Enter':
-        if (inputValue) {
-          filterCards(inputValue);
-        }
+        filterCards(inputValue);
         break;
     }
   };
@@ -35,7 +33,6 @@ const Searcbar = ({ filterCards }: SearchbarProps) => {
           value={inputValue}
           onKeyDown={handleKeyDown}
           onInput={handleInput}
-          required
         />
       </form>
     </>

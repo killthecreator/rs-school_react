@@ -14,9 +14,11 @@ interface FlickrData {
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const flickrAPICall = async (value: string): Promise<CardProps[]> => {
+const flickrAPICall = async (value = ''): Promise<CardProps[]> => {
   const res = await fetch(
-    `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&tags=${value}&tagmode=all&per_page=6&page=1&format=json&nojsoncallback=1`
+    `https://www.flickr.com/services/rest/?method=flickr.photos.${
+      value ? 'search' : 'getRecent'
+    }&api_key=${API_KEY}&text=${value}&safe_search=1&content_type=1&per_page=6&page=1&format=json&nojsoncallback=1`
   );
   const data = await res.json();
   const photosArr: CardProps[] = data.photos.photo.map((pic: FlickrData) => {
