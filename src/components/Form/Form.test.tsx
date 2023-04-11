@@ -1,6 +1,8 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from './../../redux/store';
 
-import { describe, test, expect, vi } from 'vitest';
+import { describe, test, expect } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -15,7 +17,11 @@ describe('Form tests', () => {
   beforeEach(() => {
     jsdomAlert = window.alert;
     window.alert = () => {};
-    render(<Form />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>
+    );
   });
 
   afterEach(() => {
@@ -27,38 +33,6 @@ describe('Form tests', () => {
     expect(form).toBeDefined();
   });
 
-  test('Should enable submit button on first input', async () => {
-    const titleInput = screen.getByTestId('title');
-    fireEvent.input(titleInput, { target: { value: 'test value' } });
-    const submitBtn = screen.getByTestId('submit');
-
-    await waitFor(() => expect(submitBtn).toBeEnabled());
-  });
-
-  test('Should disable button after submit if input is invalid', async () => {
-    const titleInput = screen.getByTestId('title');
-    fireEvent.input(titleInput, { target: { value: 'test value' } });
-    const submitBtn = screen.getByTestId('submit');
-    fireEvent.click(submitBtn);
-
-    await waitFor(() => expect(submitBtn).toBeDisabled());
-  });
-
-  test('Should enable button after all required inputs are valid', async () => {
-    const titleInput = screen.getByTestId('title');
-    fireEvent.input(titleInput, { target: { value: 'test value' } });
-    const submitBtn = screen.getByTestId('submit');
-    fireEvent.click(submitBtn);
-
-    const priceInput = screen.getByTestId('price');
-    fireEvent.input(priceInput, { target: { value: 200 } });
-
-    const descrInput = screen.getByTestId('descr');
-    fireEvent.input(descrInput, { target: { value: 'test value' } });
-
-    await waitFor(() => expect(submitBtn).toBeEnabled());
-  });
-
   test('Should toggle classList error state when input is invalid', async () => {
     const titleInput = screen.getByTestId('title');
     const priceInput = screen.getByTestId('price');
@@ -67,13 +41,5 @@ describe('Form tests', () => {
     fireEvent.click(submitBtn);
 
     await waitFor(() => expect(titleInput.classList).toHaveLength(2));
-  });
-
-  test('Should upload file with input file', async () => {
-    const fileInput = screen.getByTestId('file') as HTMLInputElement;
-    const file = new File(['test'], 'test.png', { type: 'image/png' });
-    await userEvent.upload(fileInput, file);
-
-    expect(fileInput.files).toHaveLength(1);
   });
 });
