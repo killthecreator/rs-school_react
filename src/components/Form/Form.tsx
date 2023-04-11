@@ -46,6 +46,7 @@ const Form = () => {
     };
     dispatch(addCard(card));
     dispatch(clearForm());
+    reset();
     alert('Card data has been saved');
   };
 

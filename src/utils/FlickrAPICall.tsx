@@ -21,7 +21,7 @@ export interface FlickrData {
   stat: 'ok' | 'fail';
 }
 
-const flickrAPICall = async (data: FlickrData): Promise<CardProps[]> => {
+const flickrDataToCard = (data: FlickrData): CardProps[] => {
   const photosArr: CardProps[] = data.photos.photo.map((pic) => {
     const image = +pic.server
       ? `https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}.jpg`
@@ -39,4 +39,4 @@ const flickrAPICall = async (data: FlickrData): Promise<CardProps[]> => {
   return photosArr;
 };
 
-export default flickrAPICall;
+export default flickrDataToCard;
