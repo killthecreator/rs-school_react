@@ -41,10 +41,8 @@ describe('Searchbar tests', () => {
   });
 
   test('Should dispatch setSearchValue on search submit', async () => {
-    const useDispatchSpy = vi.spyOn(redux, 'useDispatch');
-
     const input = screen.getByTestId('search');
     fireEvent.keyDown(input, { key: 'Enter' });
-    await waitFor(() => expect(useDispatchSpy).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(mockDispatchFn).toHaveBeenCalledTimes(1));
   });
 });
