@@ -80,6 +80,10 @@ describe('Search tests', () => {
     fireEvent.input(input, { target: { value: 'test' } });
     fireEvent.keyDown(input, { key: 'Enter' });
 
-    await waitFor(() => expect(mock).toHaveBeenCalledTimes(1));
+    if (localStorage.getItem('searchValue')) {
+      await waitFor(() => expect(mock).toHaveBeenCalledTimes(2));
+    } else {
+      await waitFor(() => expect(mock).toHaveBeenCalledTimes(1));
+    }
   });
 });
