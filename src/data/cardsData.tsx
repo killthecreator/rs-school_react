@@ -6,10 +6,10 @@ import cardIamge5 from './../assets/card-5.jpg';
 import cardIamge6 from './../assets/card-6.jpg';
 import CardProps from 'components/Card/CardProps';
 
-const cardsData: CardProps[] = [
+export const cardsData: CardProps[] = [
   {
     image: cardIamge1,
-    price: 2500,
+    price: '2500',
     title: 'Komfortowa kawalerka/Sypialnia/Balkon',
     text: `
     Pięknie urządzona nowa kawalerka do wynajęcia od 12 marca 2023.
@@ -25,7 +25,7 @@ const cardsData: CardProps[] = [
   },
   {
     image: cardIamge2,
-    price: 2200,
+    price: '2200',
     title: 'Mieszkanie Wesola Kawalerka Warszawa ',
     text: `Mieszkanie znajduję się w bardzo cichej, zielonej i spokojnej okolicy. 
     Położone w samym sercu Mazowieckiego Parku krajobrazowego w Wesołej. 
@@ -38,7 +38,7 @@ const cardsData: CardProps[] = [
   },
   {
     image: cardIamge3,
-    price: 1900,
+    price: '1900',
     title: 'Kawalerka do wynajęcia Ochota',
     text: `Do wynajęcia bezpośrednio mieszkanie 23 m2, po odświeżeniu, przy ul. Karola Dickensa.
     Wyposażenie: kuchenka gazowa z piekarnikiem, lodówka, pralka, czajnik elektryczny.
@@ -52,7 +52,7 @@ const cardsData: CardProps[] = [
   },
   {
     image: cardIamge4,
-    price: 1850,
+    price: '1850',
     title: 'Kawalerka 32m2 Mokotów  Czerniaków',
     text: `Do wynajęcia OD ZARAZ, czysta, odświeżona kawalerka 32m2 z oddzielną 
     kuchnią i łazienką na Mokotowie - Czerniaków, ul. Bluszczańska. Mieszkanie 
@@ -66,7 +66,7 @@ const cardsData: CardProps[] = [
   },
   {
     image: cardIamge5,
-    price: 2800,
+    price: '2800',
     title: 'Kawalerka do wynajęcia Ochota',
     text: `Świetna lokalizacja - tylko 250 m od stacji metra Wawrzyszew. Pokój duży,
      bardzo ustawny z balkonem! Łazienka po remoncie. Ogólnie mieszkanie zadbane. 
@@ -82,7 +82,7 @@ const cardsData: CardProps[] = [
   },
   {
     image: cardIamge6,
-    price: 2400,
+    price: '2400',
     title: 'Kawalerka do wynajęcia Ochota',
     text: `Ładne, jasne mieszkanie na 8 piętrze. 2 windy - nie trzeba chodzić po 
     schodach - nawet jednym. Parkowanie w pobliżu osiedla na ulicy. Wokół sklepy itp. 

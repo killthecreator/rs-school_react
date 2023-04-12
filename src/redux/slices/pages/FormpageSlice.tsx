@@ -6,7 +6,7 @@ interface InitialState {
   activeCards: CardProps[];
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   activeCards: [],
 };
 

@@ -11,7 +11,7 @@ import { setActiveCards } from './../../redux/slices/pages/HomepageSlice';
 import { useGetFlickrByValueQuery } from './../../redux/slices/API/flickrAPISlice';
 
 const Homepage = () => {
-  const inputValue = useSelector((state: RootState) => state.searchbar.value);
+  const inputValue = useSelector((state: RootState) => state.searchbar.submitedValue);
 
   const { data, isFetching, isError } = useGetFlickrByValueQuery(inputValue);
 
