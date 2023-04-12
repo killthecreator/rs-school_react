@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../Card/Card';
-import './Cards.scss';
 import CardsProps from './CardsProps';
+import './Cards.scss';
 
 const Cards = ({ cards }: CardsProps) => {
   return (
