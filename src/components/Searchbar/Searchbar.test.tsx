@@ -44,7 +44,6 @@ describe('Searchbar tests', () => {
     const input = screen.getByTestId('search');
     fireEvent.input(input, { target: { value: 'test' } });
     fireEvent.keyDown(input, { key: 'Enter' });
-
     await waitFor(() => expect(mockDispatchFn).toHaveBeenCalledTimes(3));
   });
 });
