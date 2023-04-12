@@ -42,7 +42,9 @@ describe('Searchbar tests', () => {
 
   test('Should dispatch setSearchValue on search submit', async () => {
     const input = screen.getByTestId('search');
+    fireEvent.input(input, { target: { value: 'test' } });
     fireEvent.keyDown(input, { key: 'Enter' });
-    await waitFor(() => expect(mockDispatchFn).toHaveBeenCalledTimes(1));
+
+    await waitFor(() => expect(mockDispatchFn).toHaveBeenCalledTimes(3));
   });
 });

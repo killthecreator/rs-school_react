@@ -6,7 +6,7 @@ import {
   formSlice,
 } from './slices/components/FormSlice';
 import {
-  setSearchValue,
+  setInputedValue,
   initialState as searchbarSliceInit,
   searchbarSlice,
 } from './slices/components/SearchbarSlice';
@@ -51,8 +51,8 @@ describe('Redux tests', () => {
 
   test('SearchbarSlice tests', () => {
     expect(searchbarSlice.getInitialState()).toEqual(searchbarSliceInit);
-    store.dispatch(setSearchValue({ value: 'test' }));
-    expect(store.getState().searchbar).toEqual({ value: 'test' });
+    store.dispatch(setInputedValue('test'));
+    expect(store.getState().searchbar.inputedValue).toEqual('test');
   });
 
   test('FormpageSlice tests', () => {

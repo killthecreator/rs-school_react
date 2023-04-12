@@ -2,20 +2,27 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface InitialState {
-  value: string;
+  inputedValue: string;
+  submitedValue: string;
 }
 
-export const initialState = {
-  value: '',
+export const initialState: InitialState = {
+  inputedValue: '',
+  submitedValue: '',
 };
 
 export const searchbarSlice = createSlice({
   name: 'searchbar',
   initialState,
   reducers: {
-    setSearchValue: (state, action: PayloadAction<InitialState>) => action.payload,
+    setSubmitedhValue: (state, action: PayloadAction<string>) => {
+      state.submitedValue = action.payload;
+    },
+    setInputedValue: (state, action: PayloadAction<string>) => {
+      state.inputedValue = action.payload;
+    },
   },
 });
 
-export const { setSearchValue } = searchbarSlice.actions;
+export const { setSubmitedhValue, setInputedValue } = searchbarSlice.actions;
 export default searchbarSlice.reducer;
