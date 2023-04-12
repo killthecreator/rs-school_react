@@ -25,7 +25,7 @@ describe('Search tests', () => {
   });
 
   test('Should render a card after form sumbit', async () => {
-    const form = screen.getByTestId('form') as HTMLFormElement;
+    const form = screen.getByTestId('form');
 
     const titleInput = screen.getByTestId('title');
     fireEvent.input(titleInput, { target: { value: 'test value' } });

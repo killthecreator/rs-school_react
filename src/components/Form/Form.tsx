@@ -37,7 +37,6 @@ const Form = () => {
 
   const onSubmit = (data: FormData) => {
     let fileLink;
-    console.log(data);
     if (data.image && data.image[0]) fileLink = URL.createObjectURL(data.image[0]);
     const card: CardProps = {
       ...data,
