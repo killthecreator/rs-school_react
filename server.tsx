@@ -1,14 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { readFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
-
-import React from 'react';
-import { renderToPipeableStream } from 'react-dom/server';
-
-import { Provider } from 'react-redux';
-import store from './src/redux/store';
-import App from './src/App';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -22,27 +18,37 @@ async function createServer() {
 
   app.use(vite.middlewares);
 
-  app.use('*', async (req, res) => {
-    let didError = false;
-    const stream = renderToPipeableStream(
-      <React.StrictMode>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </React.StrictMode>,
-      {
-        bootstrapScripts: ['./src/index.tsx'],
-        onShellReady: () => {
-          res.statusCode = didError ? 500 : 200;
-          res.setHeader('Content-type', 'text/html');
-          stream.pipe(res);
+  app.use('*', async (req, res, next) => {
+    const url = req.originalUrl;
+    try {
+      let template = await readFile(path.resolve(__dirname, 'index.html'), 'utf-8');
+      template = await vite.transformIndexHtml(url, template);
+
+      const parts = template.split('<!--ssr-outlet-->');
+
+      const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
+      const { pipe } = await render(url, {
+        onShellReady() {
+          res.write(parts[0]);
+          pipe(res);
         },
-        onError: (error) => {
-          didError = true;
-          console.log(error);
+        onShellError(err: Error) {
+          console.error(err);
         },
+        onAllReady() {
+          res.write(parts[1]);
+          res.end();
+        },
+        onError(err: Error) {
+          console.error(err);
+        },
+      });
+    } catch (e) {
+      if (e instanceof Error) {
+        vite.ssrFixStacktrace(e);
+        next(e);
       }
-    );
+    }
   });
 
   app.listen(3333);
