@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:server": "nodemon",
-    "dev": "vite",
+    "dev:ssr": "nodemon",
     "build": "tsc && vite build",
     "eslint": "eslint . --ext .tsx",
     "test": "vitest",

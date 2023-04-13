@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { readFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';

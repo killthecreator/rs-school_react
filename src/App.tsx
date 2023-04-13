@@ -8,31 +8,33 @@ import FormPage from './pages/Formpage/Formpage';
 
 import './App.scss';
 
-const App = () => (
-  <div className="App">
-    <header>
-      <nav className="nav">
-        <ul className="nav__list">
-          <li className="nav__item ">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="nav__item">
-            <NavLink to="/about">About</NavLink>
-          </li>
-          <li className="nav__item">
-            <NavLink to="/form">Form</NavLink>
-          </li>
-        </ul>
-      </nav>
-    </header>
+const App = () => {
+  return (
+    <div className="App">
+      <header>
+        <nav className="nav">
+          <ul className="nav__list">
+            <li className="nav__item ">
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li className="nav__item">
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li className="nav__item">
+              <NavLink to="/form">Form</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/form" element={<FormPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  </div>
-);
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/form" element={<FormPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </div>
+  );
+};
 
 export default App;
