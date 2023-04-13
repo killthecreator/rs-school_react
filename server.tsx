@@ -49,7 +49,8 @@ async function createServer() {
     }
   });
 
-  app.listen(3333);
+  app.listen(5173);
 }
 
 createServer();
+console.log(`Server is running on ${'http://localhost:5173/'}`);

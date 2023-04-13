@@ -6,7 +6,7 @@ import { addCard } from '../../redux/slices/pages/FormpageSlice';
 import { RootState } from './../../redux/store';
 import { setFormData, clearForm } from '../../redux/slices/components/FormSlice';
 
-import CardProps from 'components/Card/CardProps';
+import CardProps from './../../components/Card/CardProps';
 import FormData from './FormData';
 import './Form.scss';
 
