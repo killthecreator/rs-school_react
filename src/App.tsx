@@ -6,22 +6,41 @@ import NotFoundPage from './pages/Notfoundpage/Notfoundpage';
 import AboutPage from './pages/Aboutpage/Aboutpage';
 import FormPage from './pages/Formpage/Formpage';
 
-import './App.scss';
-
 const App = () => {
   return (
     <div className="App">
       <header>
-        <nav className="nav">
-          <ul className="nav__list">
-            <li className="nav__item ">
-              <NavLink to="/">Home</NavLink>
+        <nav className="py-7 bg-gray-100">
+          <ul className="flex justify-center gap-x-14">
+            <li className="transition ease-in duration-300 hover:scale-110">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? 'underline scale-105 font-bold' : 'no-underline font-semibold'
+                }
+                to="/"
+              >
+                Home
+              </NavLink>
             </li>
-            <li className="nav__item">
-              <NavLink to="/about">About</NavLink>
+            <li className="transition ease-in duration-300 hover:scale-110">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? 'underline scale-105 font-bold' : 'no-underline font-semibold'
+                }
+                to="/about"
+              >
+                About
+              </NavLink>
             </li>
-            <li className="nav__item">
-              <NavLink to="/form">Form</NavLink>
+            <li className="transition ease-in duration-300 hover:scale-110">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? 'underline scale-105 font-bold' : 'no-underline font-semibold'
+                }
+                to="/form"
+              >
+                Form
+              </NavLink>
             </li>
           </ul>
         </nav>

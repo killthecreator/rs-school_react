@@ -47,18 +47,22 @@ const Card = (props: CardProps) => {
 
   return (
     <li
-      className={`card ${props.hidden ? 'hidden' : ''} ${active ? 'active' : ''}`}
+      className={`card ${props.hidden ? 'min' : ''} ${active ? 'active' : ''}`}
       onClick={(props.hidden && !active && showFullCard) || closeCard}
       data-testid="card"
     >
       <button className="card__close-btn" ref={closeBtn}>
         X
       </button>
-      <div className="card__image-container">
-        <img src={props.image ? props.image : noImage} alt="card-image" className="card__image" />
+      <div className="overflow-hidden">
+        <img
+          src={props.image ? props.image : noImage}
+          alt="card-image"
+          className="w-full h-full object-center object-cover hover:scale-110"
+        />
       </div>
-      <div className="card__content">
-        <p className="card__title" data-testid="card-title">
+      <div className="card__content grid grid-cols-1 gap-y-5 p-5 bg-gray-100">
+        <p className="card__title max-w-full text-xl font-semibold" data-testid="card-title">
           {props.title}
         </p>
         <p className="card__price" data-testid="card-price">

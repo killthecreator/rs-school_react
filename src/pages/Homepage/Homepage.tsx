@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 
-import Searchbar from '../../components/Searchbar/Searchbar';
-import Cards from '../../components/Cards/Cards';
-import CardProps from 'components/Card/CardProps';
+import Searchbar from './../../components/Searchbar/Searchbar';
+import Cards from './../../components/Cards/Cards';
+import CardProps from './../../components/Card/CardProps';
 import flickrDataToCard from './../../utils/FlickrAPICall';
 
 import { useDispatch, useSelector } from 'react-redux';
