@@ -7,15 +7,15 @@ describe('General app test', () => {
     cy.url().should('include', '/form');
   });
 
-  /*   it('Should redirect to 404 page', () => {
+  it('Should redirect to 404 page', () => {
     cy.visit('/test');
     cy.get('h1').should('contain', 'Page is not found!');
-  }); */
+  });
 });
 
-/* describe('Homepage test', () => {
+describe('Homepage test', () => {
   it('Should fetch cards from API', () => {
     cy.visit('/');
     cy.get('input[type=search]').type('test{enter}');
   });
-}); */
+});

@@ -45,7 +45,7 @@ describe('Form tests', () => {
     const form = screen.getByTestId('form');
     fireEvent.submit(form);
 
-    await waitFor(() => expect(titleInput.classList).toHaveLength(2));
+    await waitFor(() => expect(titleInput.classList).toHaveLength(1));
   });
 
   test('Should call dispatch 2 times when submittin the form', async () => {

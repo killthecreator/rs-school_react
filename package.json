@@ -1,5 +1,4 @@
 {
-  "name": "RS React: Module6",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +6,8 @@
     "dev:ssr": "nodemon",
     "build": "tsc && vite build",
     "cypress": "cypress open",
-    "coverage:e2e": "npx nyc report --reporter=text-summary",
+    "instrument": "nyc instrument --compact=false src instrumented",
+    "coverage:e2e": "nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=text --exclude-after-remap false",
     "test": "vitest",
     "coverage:unit": "vitest run --coverage",
     "eslint": "eslint . --ext .tsx"
@@ -50,6 +50,7 @@
     "jsdom": "^21.1.0",
     "lint-staged": "^13.1.2",
     "nodemon": "^2.0.22",
+    "nyc": "^15.1.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "tailwindcss": "^3.3.1",

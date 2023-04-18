@@ -1,10 +1,10 @@
-import cardIamge1 from './../assets/card-1.jpg';
-import cardIamge2 from './../assets/card-2.jpg';
-import cardIamge3 from './../assets/card-3.jpg';
-import cardIamge4 from './../assets/card-4.jpg';
-import cardIamge5 from './../assets/card-5.jpg';
-import cardIamge6 from './../assets/card-6.jpg';
-import CardProps from 'components/Card/CardProps';
+import cardIamge1 from './../assets/images/card-1.jpg';
+import cardIamge2 from './../assets/images/card-2.jpg';
+import cardIamge3 from './../assets/images/card-3.jpg';
+import cardIamge4 from './../assets/images/card-4.jpg';
+import cardIamge5 from './../assets/images/card-5.jpg';
+import cardIamge6 from './../assets/images/card-6.jpg';
+import CardProps from './../components/Card/CardProps';
 
 export const cardsData: CardProps[] = [
   {

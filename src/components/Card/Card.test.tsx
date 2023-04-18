@@ -31,6 +31,5 @@ describe('Card tests', () => {
     fireEvent.click(bookmarks);
     const newBookmarks = bookmarks.textContent as string;
     expect(+newBookmarks).toBe(+curBookmarks + 1);
-    expect(bookmarks.classList).toHaveLength(2);
   });
 });

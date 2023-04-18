@@ -7,6 +7,11 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  env: {
+    codeCoverage: {
+      exclude: 'cypress/**/.*',
+    },
+  },
   e2e: {
     baseUrl: 'http://localhost:5173',
     setupNodeEvents(on, config) {

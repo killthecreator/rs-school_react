@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { LoremIpsum } from 'react-lorem-ipsum';
 
-import like from './../../assets/like.svg';
-import bookmark from './../../assets/bookmark.svg';
-import noImage from './../../assets/no-image.jpg';
-import cross from './../../assets/cross.webp';
+import like from './../../assets/icons/like.svg';
+import bookmark from './../../assets/icons/bookmark.svg';
+import noImage from './../../assets/images/no-image.jpg';
+import cross from './../../assets/images/cross.webp';
 
 import CardProps from './CardProps';
 import { Btn } from './CardBtn';

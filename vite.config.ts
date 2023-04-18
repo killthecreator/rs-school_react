@@ -6,14 +6,13 @@ import istanbul from 'vite-plugin-istanbul';
 export default defineConfig({
   plugins: [
     react(),
-    /*     istanbul({
+    istanbul({
       include: 'src/*',
-      exclude: ['node_modules', 'coverage/'],
-      extension: ['.js', '.jsx', '.ts', '.tsx'],
+      extension: ['.tsx'],
       cypress: true,
       requireEnv: true,
       forceBuildInstrument: true,
-    }), */
+    }),
   ],
   build: {
     sourcemap: true,
