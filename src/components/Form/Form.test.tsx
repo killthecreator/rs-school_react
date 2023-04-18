@@ -4,7 +4,7 @@ import { describe, test, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Form from './Form';
+import Form, { handleFileInput } from './Form';
 
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
@@ -62,13 +62,26 @@ describe('Form tests', () => {
     await waitFor(() => expect(submitBtn).toBeEnabled());
   });
 
+  test('Should toggle classList error state when input is invalid', async () => {
+    const titleInput = screen.getByTestId('title');
+    const priceInput = screen.getByTestId('price');
+    fireEvent.input(priceInput, { target: { value: 200 } });
+    const submitBtn = screen.getByTestId('submit');
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => expect(titleInput.classList).toHaveLength(2));
+  });
+
   test('Should upload file with input file', async () => {
     const fileInput = screen.getByTestId('file') as HTMLInputElement;
     const file = new File(['test'], 'test.png', { type: 'image/png' });
     await userEvent.upload(fileInput, file);
 
-    if (fileInput.files) {
-      expect(fileInput.files[0]).toStrictEqual(file);
-    }
+    expect(fileInput.files).toHaveLength(1);
+  });
+
+  test('Should catch an error with empty return when there is no such file', async () => {
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+    expect(handleFileInput(file)).toBe(undefined);
   });
 });

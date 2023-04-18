@@ -23,7 +23,7 @@ describe('Card tests', () => {
     expect(card).toBeDefined();
   });
 
-  test('Should increase Card button value on click', () => {
+  test('Should increase Card button value on click and set active state to it', () => {
     render(<Card {...cardsData[0]} />);
 
     const bookmarks = screen.getByTestId('bookmarks');
@@ -31,5 +31,6 @@ describe('Card tests', () => {
     fireEvent.click(bookmarks);
     const newBookmarks = bookmarks.textContent as string;
     expect(+newBookmarks).toBe(+curBookmarks + 1);
+    expect(bookmarks.classList).toHaveLength(2);
   });
 });

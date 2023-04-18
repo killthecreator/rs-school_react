@@ -2,7 +2,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.scss';
 import FormProps from './FormProps';
+import FormData from './FormData';
 
+<<<<<<< HEAD
 import noImage from './../../assets/no-image.jpg';
 
 <<<<<<< HEAD
@@ -215,6 +217,16 @@ interface FormData {
   text: string;
 >>>>>>> module03
 }
+=======
+export const handleFileInput = (image: File) => {
+  try {
+    const link = URL.createObjectURL(image);
+    return link;
+  } catch (e) {
+    return;
+  }
+};
+>>>>>>> module04
 
 const Form = (props: FormProps) => {
   const {
@@ -225,23 +237,16 @@ const Form = (props: FormProps) => {
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
-    const fileLink = handleFileInput(data.image);
+    const fileLink = handleFileInput(data.image[0]);
     const card = {
       ...data,
-      image: fileLink ? fileLink : noImage,
+      image: fileLink,
       bookmarks: 0,
       likes: 0,
     };
     props.addCard(card);
     alert('Card data has been saved');
     reset();
-  };
-
-  const handleFileInput = (image: FileList) => {
-    if (image[0]) {
-      const link = URL.createObjectURL(image[0]);
-      return link;
-    }
   };
 
   return (
