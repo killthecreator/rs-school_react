@@ -4,10 +4,11 @@ import { LoremIpsum } from 'react-lorem-ipsum';
 import like from './../../assets/like.svg';
 import bookmark from './../../assets/bookmark.svg';
 import noImage from './../../assets/no-image.jpg';
-import cross from './../../assets/cross.webp';
 
 import CardProps from './CardProps';
 import { Btn } from './CardBtn';
+
+import './Card.scss';
 
 const Card = (props: CardProps) => {
   const closeBtn = useRef<HTMLButtonElement>(null);
@@ -39,26 +40,19 @@ const Card = (props: CardProps) => {
 
   const showFullCard = () => setActive(true);
   const closeCard = (e: React.SyntheticEvent<HTMLElement>) => {
-    if (
-      (closeBtn.current && closeBtn.current.contains(e.target as Node)) ||
-      e.target === e.currentTarget
-    ) {
+    if ((closeBtn.current && e.target === closeBtn.current) || e.target === e.currentTarget) {
       setActive(false);
     }
   };
 
   return (
     <li
-      className={`card group ${props.hidden && !active ? 'min' : ''} ${active ? 'max' : ''}`}
+      className={`card ${props.hidden ? 'min' : ''} ${active ? 'active' : ''}`}
       onClick={(props.hidden && !active && showFullCard) || closeCard}
       data-testid="card"
     >
-      <button
-        className="hidden absolute top-5 right-5 w-5 h-5 p-0.5 rounded-half 
-        border-2 border-black border-solid cursor-pointer group-[.max]:flex"
-        ref={closeBtn}
-      >
-        <img src={cross} alt="cross" />
+      <button className="card__close-btn" ref={closeBtn}>
+        X
       </button>
       <div className="overflow-hidden">
         <img
@@ -67,48 +61,34 @@ const Card = (props: CardProps) => {
           className="w-full h-full object-center object-cover hover:scale-110"
         />
       </div>
-      <div
-        className="grid grid-cols-1 gap-y-5 p-5 bg-gray-100 
-      group-[.min]:py-2.5 group-[.min]:px-5 group-[.max]:p-5 group-[.max]:pt-20"
-      >
-        <p
-          className="max-w-full text-xl font-semibold 
-          whitespace-nowrap overflow-hidden text-ellipsis 
-          group-[.min]:text-center group-[.max]:text-left 
-          group-[.max]:whitespace-normal"
-          data-testid="card-title"
-        >
+      <div className="card__content grid grid-cols-1 gap-y-5 p-5 bg-gray-100">
+        <p className="card__title max-w-full text-xl font-semibold" data-testid="card-title">
           {props.title}
         </p>
-        <p className="flex text-base font-medium group-[.min]:hidden" data-testid="card-price">
+        <p className="card__price" data-testid="card-price">
           {props.price}
           {+props.price ? <span>zł</span> : ''}
         </p>
-        <div
-          className="flex max-w-full max-h-24 overflow-scroll text-sm 
-          group-[.min]:hidden group-[.max]:max-h-none "
-          data-testid="card-descr"
-        >
+        <div className="card__description" data-testid="card-descr">
           {props.text ? props.text : <LoremIpsum random={false} />}
         </div>
-        <div className="flex justify-self-center self-end gap-x-2.5 group-[.min]:hidden">
+        <div className="card__btns">
           <button
-            className={`card-btn group bg-cyan-400
-             ${likes.active && 'clicked'}`}
+            className={`card__btn ${likes.active && 'active'}`}
             onClick={hadnleBtnClick}
             data-btntype="likes"
             data-testid="likes"
           >
-            <img className="w-4 group-[.clicked]:invert" src={like} alt="like-icon" />
+            <img src={like} alt="like-icon" />
             <span> {likes.counter}</span>
           </button>
           <button
-            className={`card-btn group bg-green-400  ${bookmarks.active && 'clicked'}`}
+            className={`card__btn ${bookmarks.active && 'active'}`}
             onClick={hadnleBtnClick}
             data-btntype="bookmarks"
             data-testid="bookmarks"
           >
-            <img className="w-4 group-[.clicked]:invert" src={bookmark} alt="bookmark-icon" />
+            <img src={bookmark} alt="bookmark-icon" />
             <span>{bookmarks.counter}</span>
           </button>
         </div>

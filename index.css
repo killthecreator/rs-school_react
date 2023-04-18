@@ -28,3 +28,33 @@
     @apply hidden;
   }
 }
+
+.card {
+  @apply grid grid-rows-card h-card border-2 border-black border-solid 
+  rounded-3xl overflow-hidden;
+}
+
+.card--webkit-scrollbar {
+  display: none;
+}
+
+.card.min {
+  @apply grid-rows-card-min max-h-56 cursor-pointer;
+}
+
+.card.max {
+  @apply absolute left-0 right-0 z-10 grid-cols-card-max grid-rows-none
+  max-h-600px max-w-1000px m-auto cursor-default 
+  after:content-[''] after:fixed after:left-0 after:top-0 
+  after:z-negative after:w-screen after:h-screen after:bg-overlay;
+}
+
+.card-btn {
+  @apply flex items-center justify-center gap-x-1.5 w-20 h-8
+  rounded-lg cursor-pointer border border-black border-solid
+  opacity-70 hover:scale-110;
+}
+
+.card-btn.clicked {
+  @apply border border-solid border-gray-300 opacity-100 text-gray-300;
+}
