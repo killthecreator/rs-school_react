@@ -23,7 +23,7 @@ const Searcbar = () => {
   };
 
   return (
-    <form className="search" data-testid="form" onSubmit={(e) => e.preventDefault()}>
+    <form data-testid="form" onSubmit={(e) => e.preventDefault()}>
       <input
         type="search"
         className="w-52 h-8 p-2.5 border border-solid border-gray-400 rounded-lg outline-none"

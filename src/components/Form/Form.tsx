@@ -8,7 +8,6 @@ import { setFormData, clearForm } from '../../redux/slices/components/FormSlice'
 
 import CardProps from './../../components/Card/CardProps';
 import FormData from './FormData';
-import './Form.scss';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -53,9 +52,9 @@ const Form = () => {
   return (
     <form className="form" data-testid="form" onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
-        <label className="form__label">Flat image</label>
+        <label>Flat image</label>
         <input
-          className="form__input form__input_type_file"
+          className="w-64 py-1 px-2.5 cursor-pointer"
           type="file"
           placeholder="Attach flat image"
           accept="image/*"
@@ -65,9 +64,9 @@ const Form = () => {
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Flat Title</label>
+        <label>Flat Title</label>
         <input
-          className={`form__input form__input_type_title ${errors.title ? 'error' : ''}`}
+          className={errors.title ? 'error' : ''}
           type="text"
           placeholder="Input flat name"
           data-testid="title"
@@ -77,9 +76,9 @@ const Form = () => {
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Flat Price</label>
+        <label>Flat Price</label>
         <input
-          className={`form__input form__input_type_price ${errors.price ? 'error' : ''}`}
+          className={errors.price ? 'error' : ''}
           type="number"
           data-testid="price"
           placeholder="Input flat price"
@@ -89,9 +88,9 @@ const Form = () => {
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Flat Description</label>
+        <label>Flat Description</label>
         <textarea
-          className={`form__input form__input_type_descr ${errors.text ? 'error' : ''}`}
+          className={`h-fit ${errors.text ? 'error' : ''}`}
           placeholder="Input flat description"
           data-testid="descr"
           {...register('text', { required: 'Input description' })}
@@ -100,10 +99,10 @@ const Form = () => {
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Date of arrival</label>
+        <label>Date of arrival</label>
         <input
           type="date"
-          className={`form__input ${errors.date ? 'error' : ''}`}
+          className={errors.date ? 'error' : ''}
           placeholder="Input arrival date"
           data-testid="date"
           {...register('date', { required: 'Choose a date' })}
@@ -112,47 +111,51 @@ const Form = () => {
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Persons planning to live</label>
-        <div className="fieldset_type_radio__wrapper">
-          <div className="form__input_type_radio">
-            <label className="form__label">1</label>
+        <label>Persons planning to live</label>
+        <div>
+          <div>
+            <label className="text-xs">1</label>
             <input
               type="radio"
-              className="form__input"
+              className="w-5 h-5"
               value="1"
               data-testid="radio"
               {...register('persons', { required: 'Pick a number' })}
             />
           </div>
-          <div className="form__input_type_radio">
-            <label className="form__label">2</label>
-            <input type="radio" className="form__input" value="2" {...register('persons')} />
+          <div>
+            <label className="text-xs">2</label>
+            <input type="radio" className="w-5 h-5" value="2" {...register('persons')} />
           </div>
-          <div className="form__input_type_radio">
-            <label className="form__label"> &gt;2</label>
-            <input type="radio" className="form__input" value=">2" {...register('persons')} />
+          <div>
+            <label className="text-xs"> &gt;2</label>
+            <input type="radio" className="w-5 h-5" value=">2" {...register('persons')} />
           </div>
         </div>
         {errors.persons && <span>{errors.persons.message}</span>}
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Special conditions</label>
+        <label>Special conditions</label>
         <div>
           <div>
-            <label className="form__label">Smoking allowed</label>
-            <input type="checkbox" className="form__input" {...register('smoking')} />
+            <label className="text-xs">Smoking allowed</label>
+            <input type="checkbox" className="w-5 h-5" {...register('smoking')} />
           </div>
           <div>
-            <label className="form__label">Pets allowed</label>
-            <input type="checkbox" className="form__input" {...register('pets')} />
+            <label className="text-xs">Pets allowed</label>
+            <input type="checkbox" className="w-5 h-5" {...register('pets')} />
           </div>
         </div>
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Pick area</label>
-        <select {...register('location', { required: 'Pick area' })} data-testid="select">
+        <label>Pick area</label>
+        <select
+          className="border border-solid border-black rounded-md"
+          {...register('location', { required: 'Pick area' })}
+          data-testid="select"
+        >
           <option value="" hidden>
             Pick area
           </option>
@@ -178,9 +181,9 @@ const Form = () => {
       </fieldset>
 
       <fieldset>
-        <label className="form__label">Submit your ad</label>
+        <label>Submit your ad</label>
         <input
-          className="form__input form__input_type_submit"
+          className="text-center cursor-pointer border-black font-semibold"
           type="submit"
           value="Submit"
           data-testid="submit"

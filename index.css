@@ -27,6 +27,12 @@
   input[type='search']::-webkit-search-results-decoration {
     @apply hidden;
   }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 .card {
@@ -57,4 +63,29 @@
 
 .card-btn.clicked {
   @apply border border-solid border-gray-300 opacity-100 text-gray-300;
+}
+
+.form {
+  @apply flex justify-center flex-wrap items-center gap-x-10 gap-y-5;
+}
+
+.form .error {
+  outline: 1px solid red;
+}
+
+fieldset {
+  @apply relative flex flex-col items-center gap-y-2.5 p-1 border-none;
+}
+
+fieldset span {
+  @apply absolute -bottom-4 text-xs text-red-600;
+}
+
+fieldset div {
+  @apply flex gap-x-2.5 items-center;
+}
+
+fieldset input,
+fieldset textarea {
+  @apply w-40 max-w-xs h-10 px-2.5 border border-solid border-gray-500 text-right rounded-lg hover:scale-105;
 }
