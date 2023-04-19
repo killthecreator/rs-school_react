@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev:ssr": "nodemon",
-    "build": "tsc && vite build",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "cypress": "cypress open",
     "coverage:e2e": "nyc report --report-dir ./coverage --temp-dir .nyc_output --reporter=text --exclude-after-remap false",
     "test": "vitest",
