@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:ssr": "nodemon",
+    "dev:ssr": "cross-env NODE_ENV='dev' nodemon",
+    "prod:ssr": "nodemon",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",

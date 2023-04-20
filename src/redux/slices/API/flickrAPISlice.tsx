@@ -1,5 +1,4 @@
-import pkgQuery from '@reduxjs/toolkit/dist/query/react';
-const { createApi, fetchBaseQuery } = pkgQuery;
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { FlickrData } from './../../../utils/FlickrAPICall';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
