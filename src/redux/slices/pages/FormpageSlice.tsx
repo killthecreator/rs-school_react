@@ -1,5 +1,7 @@
 import * as toolkitRaw from '@reduxjs/toolkit';
-const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
+const { createSlice } = (
+  'default' in toolkitRaw ? toolkitRaw.default : toolkitRaw
+) as typeof toolkitRaw;
 import type { PayloadAction } from '@reduxjs/toolkit';
 import CardProps from '../../../components/Card/CardProps';
 

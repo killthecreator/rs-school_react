@@ -1,6 +1,7 @@
 import * as toolkitQueryRaw from '@reduxjs/toolkit/dist/query/react';
-const { createApi, fetchBaseQuery } = ((toolkitQueryRaw as any).default ??
-  toolkitQueryRaw) as typeof toolkitQueryRaw;
+const { createApi, fetchBaseQuery } = (
+  'default' in toolkitQueryRaw ? toolkitQueryRaw.default : toolkitQueryRaw
+) as typeof toolkitQueryRaw;
 import { FlickrData } from './../../../utils/FlickrAPICall';
 
 const API_KEY = import.meta.env.VITE_API_KEY;

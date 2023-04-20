@@ -1,5 +1,7 @@
 import * as toolkitRaw from '@reduxjs/toolkit';
-const { configureStore } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
+const { configureStore } = (
+  'default' in toolkitRaw ? toolkitRaw.default : toolkitRaw
+) as typeof toolkitRaw;
 import searchbarSliceReducer from './slices/components/SearchbarSlice';
 import homepageSliceReducer from './slices/pages/HomepageSlice';
 import formpageSliceReducer from './slices/pages/FormpageSlice';

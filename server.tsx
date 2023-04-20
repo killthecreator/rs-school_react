@@ -41,6 +41,7 @@ async function createServer() {
       } else {
         template = await readFile(resolve('dist/client/index.html'), 'utf-8');
 
+        // eslint-disable-next-line
         // @ts-ignore
         render = (await import('./dist/server/entry-server.js')).render;
       }
