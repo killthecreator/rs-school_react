@@ -69,8 +69,11 @@ async function createServer() {
     }
   });
 
-  app.listen(port);
+  return { app };
 }
 
-createServer();
-console.log(`Server is running on http://localhost:${5173}/`);
+createServer().then(({ app }) =>
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}/`);
+  })
+);
