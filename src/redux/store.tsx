@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit/src/configureStore';
 import searchbarSliceReducer from './slices/components/SearchbarSlice';
 import homepageSliceReducer from './slices/pages/HomepageSlice';
 import formpageSliceReducer from './slices/pages/FormpageSlice';

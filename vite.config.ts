@@ -12,7 +12,13 @@ export default defineConfig({
   ],
   build: {
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        minifyInternalExports: false,
+      },
+    },
   },
+
   test: {
     globals: true,
     environment: 'jsdom',
