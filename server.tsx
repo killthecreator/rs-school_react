@@ -15,7 +15,7 @@ async function createServer() {
 
   let vite: ViteDevServer;
 
-  if (process.env.NODE_ENV) {
+  if (!isProd) {
     vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'custom',
@@ -33,12 +33,18 @@ async function createServer() {
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
     try {
-      let template = await readFile(path.resolve(__dirname, 'index.html'), 'utf-8');
-      template = await vite.transformIndexHtml(url, template);
+      let template: string, render;
+      if (!isProd) {
+        template = await readFile(path.resolve(__dirname, 'index.html'), 'utf-8');
+        template = await vite.transformIndexHtml(url, template);
 
+        render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
+      } else {
+        template = await readFile(resolve('dist/client/index.html'), 'utf-8');
+        // @ts-ignore
+        render = (await import('./dist/server/entry-server.js')).render;
+      }
       const parts = template.split('<!--ssr-outlet-->');
-
-      const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
       const { pipe } = await render(url, {
         onShellReady() {
           res.write(parts[0]);
