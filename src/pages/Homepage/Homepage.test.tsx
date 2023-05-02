@@ -21,7 +21,7 @@ describe('Search tests', () => {
 
   test('Should fetch cards', async () => {
     const input = screen.getByTestId('search');
-    fireEvent.keyDown(input, { key: 'Enter' });
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter', charCode: 13 });
 
     await waitFor(() => {
       const cards = screen.getByTestId('cards');
