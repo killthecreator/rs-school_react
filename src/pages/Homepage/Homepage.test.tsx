@@ -23,7 +23,7 @@ describe('Search tests', () => {
     const input = screen.getByTestId('search');
     fireEvent.keyDown(input, { key: 'Enter', code: 'Enter', charCode: 13 });
 
-    waitFor(() => {
+    await waitFor(() => {
       const cards = screen.getByTestId('cards');
       expect(cards.children).toHaveLength(6);
     });

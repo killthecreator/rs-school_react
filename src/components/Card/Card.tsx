@@ -9,6 +9,10 @@ import cross from './../../assets/images/cross.webp';
 import CardProps from './CardProps';
 import { Btn } from './CardBtn';
 
+
+
+
+
 const Card = (props: CardProps) => {
   const closeBtn = useRef<HTMLButtonElement>(null);
   const [likes, setLikes] = useState({ counter: props.likes, active: false });
